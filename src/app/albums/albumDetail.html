@@ -1,0 +1,56 @@
+<div *ngIf="album$ | async as album">
+
+  <!-- HEADER ALBUM -->
+  <div class="album-header">
+
+    <img 
+      [src]="album.coverUrl"
+      class="cover-large"
+    >
+
+    <div class="album-meta">
+
+      <h2>{{ album.name }}</h2>
+
+      <div>
+        <span *ngFor="let artist of album.artists; let last = last">
+          {{ artist.name }}<span *ngIf="!last">, </span>
+        </span>
+      </div>
+
+      <div class="date">
+        {{ album.releaseDate }}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TRACKLIST -->
+<div *ngIf="songs$ | async as songs">
+
+  <h3>Tracklist</h3>
+
+  <ul>
+
+    <li *ngFor="let song of songs" class="song-row">
+
+      <div class="track-number">
+        {{ song.trackNumber }}
+      </div>
+
+      <div class="title">
+        {{ song.title }}
+      </div>
+
+      <div class="duration">
+        {{ formatDuration(song.durationSeconds) }}
+      </div>
+
+    </li>
+
+  </ul>
+
+</div>

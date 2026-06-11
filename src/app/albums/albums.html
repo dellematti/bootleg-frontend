@@ -1,0 +1,51 @@
+<h2>Albums</h2>
+
+<!-- LOADING + DATA -->
+<div *ngIf="albums$ | async as albums; else loading">
+
+  <ul>
+
+    <li *ngFor="let album of albums"
+    [routerLink]="['/albums', album.id]"
+    class="album-row">
+
+
+      <!-- PARTE SINISTRA -->
+      <div class="album-info">
+
+        <!-- NOME ALBUM -->
+        <div>
+          <b>{{ album.name }}</b>
+        </div>
+
+        <!-- ARTISTI -->
+        <div>
+          <span *ngFor="let artist of album.artists; let last = last">
+            {{ artist.name }}<span *ngIf="!last">, </span>
+          </span>
+        </div>
+
+        <!-- DATA USCITA -->
+        <div>
+          {{ album.releaseDate }}
+        </div>
+
+      </div>
+
+      <!-- COVER A DESTRA -->
+      <img 
+        [src]="album.coverUrl" 
+        alt="cover"
+        class="cover-small"
+      >
+
+    </li>
+
+  </ul>
+
+</div>
+
+<!-- TEMPLATE LOADING -->
+<ng-template #loading>
+  <p>Loading albums...</p>
+</ng-template>

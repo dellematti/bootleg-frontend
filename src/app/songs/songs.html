@@ -1,0 +1,96 @@
+
+<!--
+
+<h2>Canzoni</h2>
+
+
+<ul>
+
+
+
+    <li *ngFor="let song of songs" class="song-row">
+
+    <div class="song-info">
+
+        <div>
+        {{ song.trackNumber }}. <b>{{ song.title }}</b> -
+        <span *ngFor="let artist of song.artists; let last = last">
+            {{ artist.name }}<span *ngIf="!last">, </span>
+        </span>
+        </div>
+
+        <div>
+        Album: {{ song.album.name }}
+        </div>
+
+        <div>
+        {{ formatDuration(song.durationSeconds) }}
+        </div>
+
+    </div>
+
+    <img 
+        [src]="song.album.coverUrl" 
+        class="cover-small"
+    >
+
+    </li>
+
+</ul>
+
+-->
+
+
+
+<h2>Canzoni</h2>
+
+<!-- LOADING + DATA -->
+<div *ngIf="songs$ | async as songs; else loading">
+
+  <ul>
+
+    <li *ngFor="let song of songs" class="song-row">
+
+      <!-- PARTE SINISTRA -->
+      <div class="song-info">
+
+        <div>
+          {{ song.trackNumber }}. <b>{{ song.title }}</b>
+        </div>
+
+        <div>
+          <span *ngFor="let artist of song.artists; let last = last">
+            {{ artist.name }}<span *ngIf="!last">, </span>
+          </span>
+        </div>
+
+        <div>
+          {{ formatDuration(song.durationSeconds) }}
+        </div>
+
+        <div>
+          Album: {{ song.album.name }}
+        </div>
+
+      </div>
+
+      <!-- COVER A DESTRA -->
+      <img 
+        [src]="song.album.coverUrl" 
+        alt="cover"
+        class="cover-small"
+      >
+
+    </li>
+
+  </ul>
+
+</div>
+
+<!-- TEMPLATE LOADING -->
+<ng-template #loading>
+  <p>Loading songs...</p>
+</ng-template>
+``
+
+

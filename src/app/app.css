@@ -1,0 +1,127 @@
+.navbar {
+
+  margin: 0 auto;
+
+  position: fixed;         
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  height: 50px;             
+  background: #111;        
+
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+
+  padding: 0 40px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+
+  z-index: 1000;
+}
+
+/* LINK */
+.home-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+/* per ora uguale al login di home */
+.login-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+
+/* hover leggero */
+.home-link:hover {
+  opacity: 0.8;
+}
+
+
+.content {
+  margin-top: 60px; /* spazio navbar */
+  padding: 20px;
+}
+
+
+
+.nav-left {
+  display: flex;
+}
+
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;            /* spazio tra username e logout */
+}
+
+
+/* username */
+.nav-right span {
+  color: white;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  opacity: 0.9;
+}
+
+/* bottone logout */
+.nav-right button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+
+  color: white;
+  padding: 5px 10px;
+
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+/* hover */
+.nav-right button:hover {
+  background-color: white;
+  color: #111;
+  border-color: white;
+}
+
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* username */
+.user-section span {
+  color: white;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}
+
+
+.logout-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+
+  cursor: pointer;
+}
+
+
+.logout-link:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,23 @@
+<div class="spotify-container">
+  <div class="search-box-container">
+    <input 
+      #searchBox 
+      type="text" 
+      class="search-input" 
+      placeholder="Ricerca artisti" 
+      (input)="search($event)" />
+  </div>
+
+  <div class="results-container" *ngIf="artists$ | async as artists; else loadingOrInitial">
+    
+    <app-artist-grid *ngIf="artists.length > 0" [artists]="artists"></app-artist-grid>
+
+    <div class="no-results" *ngIf="artists.length === 0 && searchBox.value">
+      Nessun artista trovato per "{{ searchBox.value }}"
+    </div>
+  </div>
+
+  <ng-template #loadingOrInitial>
+    <p class="search-hint" *ngIf="!searchBox.value">Concerti</p>
+  </ng-template>
+</div>

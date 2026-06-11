@@ -1,0 +1,39 @@
+.album-header {
+  display: flex;
+  gap: 20px;
+}
+
+.cover-large {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.album-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.date {
+  color: gray;
+  margin-top: 8px;
+}
+
+/* TRACKLIST */
+
+.song-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.track-number {
+  text-align: center;
+}
+
+.duration {
+  text-align: right;
+}

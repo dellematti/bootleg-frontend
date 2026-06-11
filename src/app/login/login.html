@@ -1,0 +1,53 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h2 class="login-title">Login</h2>
+
+    <form (ngSubmit)="onLogin()">
+
+      <!-- USERNAME -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          [(ngModel)]="request.username"
+          name="username"
+          placeholder="Inserisci username"
+          required
+        />
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          [(ngModel)]="request.password"
+          name="password"
+          placeholder="Inserisci password"
+          required
+        />
+      </div>
+
+      <!-- BUTTON -->
+      <button type="submit">Login</button>
+
+    </form>
+
+    <!-- ERRORE -->
+    <p class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+
+    <!-- LOGIN -->
+    <p class="register-link">
+      Non hai un account?
+      <a routerLink="/register">Registrati</a>
+    </p>
+
+  </div>
+
+</div>
