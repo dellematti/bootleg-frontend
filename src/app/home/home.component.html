@@ -1,0 +1,74 @@
+<div class="home-container">
+
+  <header class="hero-section">
+    <h1>Music App</h1>
+    <p class="subtitle">Scegli una sezione</p>
+
+    <div class="cards">
+      <div class="card" routerLink="/songs">
+        <div class="icon">🎵</div>
+        <div class="title">Songs</div>
+      </div>
+      <div class="card" routerLink="/artists">
+        <div class="icon">🎤</div>
+        <div class="title">Artists</div>
+      </div>
+      <div class="card" routerLink="/albums">
+        <div class="icon">💿</div>
+        <div class="title">Albums</div>
+      </div>
+    </div>
+  </header>
+
+  <hr class="section-divider">
+
+  <main class="content-section">
+    <div class="section-header">
+      <h2>🎤 Concerti in arrivo in Italia</h2>
+      <p class="section-subtitle">I prossimi eventi live da non perdere nei prossimi giorni</p>
+    </div>
+
+    @if (isConcertsLoading) {
+      <div class="loading-state">
+        <p>Caricamento dei concerti in corso...</p>
+      </div>
+    }
+
+    @if (!isConcertsLoading && concerts.length === 0) {
+      <div class="empty-state">
+        <p>Nessun concerto trovato per i prossimi giorni. Riprova più tardi!</p>
+      </div>
+    }
+
+    @if (!isConcertsLoading && concerts.length > 0) {
+      <div class="concerts-grid">
+        
+        @for (concert of concerts; track concert.id) {
+          <div class="concert-card">
+            
+            <div class="card-image-wrapper">
+              <img [src]="concert.imageUrl" [alt]="concert.name" class="concert-img">
+              <span class="city-badge">📍 {{ concert.city }}</span>
+            </div>
+
+            <div class="card-body">
+              <h3 class="concert-title" [title]="concert.name">{{ concert.name }}</h3>
+              
+              <div class="concert-details">
+                <p class="detail-item">📅 {{ concert.date }}</p>
+                <p class="detail-item venue" [title]="concert.venue">🏛️ {{ concert.venue }}</p>
+              </div>
+
+              <a [href]="concert.ticketUrl" target="_blank" class="btn-tickets">
+                Acquista Biglietti
+              </a>
+            </div>
+
+          </div>
+        }
+
+      </div>
+    }
+  </main>
+
+</div>

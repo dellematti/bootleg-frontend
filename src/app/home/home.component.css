@@ -1,0 +1,191 @@
+/* è un alternativa a home.css*/
+.concerts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.concert-card {
+  background-color: #181818; /* Sfondo scuro stile Spotify */
+  border-radius: 8px;
+  padding: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.concert-card:hover {
+  background-color: #282828; /* Si schiarisce al passaggio del mouse */
+}
+
+.btn-tickets {
+  display: block;
+  text-align: center;
+  background-color: #1db954; /* Verde Spotify */
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+
+
+/* --- SEZIONE CONCERTI TICKETMASTER --- */
+.content-section {
+  margin-top: 30px;
+  padding: 20px 0;
+}
+
+.section-header {
+  margin-bottom: 25px;
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.section-subtitle {
+  color: #666;
+  font-size: 1rem;
+}
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 40px 0;
+}
+
+/* 🪄 LA GRIGLIA MAGICA: Affianca automaticamente le card e le manda a capo se lo schermo si rimpicciolisce */
+.concerts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 10px 0;
+}
+
+/* STRUTTURA DELLA CARD */
+.concert-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Effetto al passaggio del mouse */
+.concert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* CONTENITORE IMMAGINE */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.concert-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Taglia l'immagine perfettamente senza distorcerla */
+}
+
+/* Etichetta della Città sopra l'immagine */
+.city-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+/* CORPO DEL TESTO DENTRO LA CARD */
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Spinge il bottone sempre in fondo alla card */
+}
+
+.concert-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #222;
+  line-height: 1.4;
+  /* Taglia il testo a massimo 2 righe con i tre puntini se il nome del concerto è lunghissimo */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.8em; 
+}
+
+.concert-details {
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.detail-item {
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.detail-item.venue {
+  font-weight: 500;
+  color: #444;
+  /* Se il locale ha un nome chilometrico, lo taglia elegantemente */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px; 
+}
+
+/* IL BOTTONE PER GLI ACQUISTI */
+.btn-tickets {
+  display: block;
+  text-align: center;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.btn-tickets:hover {
+  background: #0056b3;
+}
+
+/* STATI DI LOADING E VUOTO */
+.loading-state, .empty-state {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.1rem;
+  color: #666;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+}
+
+
+

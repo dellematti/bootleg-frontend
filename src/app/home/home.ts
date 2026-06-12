@@ -1,56 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { Component, OnInit, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core'; // 1. 👈 Aggiungi Inject e PLATFORM_ID
+import { CommonModule, isPlatformBrowser } from '@angular/common'; // 2. 👈 Aggiungi isPlatformBrowser
 import { RouterLink } from '@angular/router';
+import { ConcertService } from '../services/concert.service';
+import { MusicEvent } from '../models/event';
 
 @Component({
+  selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
-  styleUrl: './home.css',
-  //styleUrls: ['./home.css'] ,
-  
-  template: `
-  
-  <!--
-    <h2>Homepage</h2>
-        <p>Scegli una sezione:</p>
-        <div>
-            <a routerLink="/songs">Vai alle Songs</a><br>
-            <a routerLink="/artists">Vai agli Artists</a><br>
-            <a routerLink="/albums">Vai agli Albums</a>
-        </div>
--->
-
-
-  <div class="home-container">
-
-    <h1>Music App</h1>
-    <p class="subtitle">Scegli una sezione</p>
-
-    <div class="cards">
-
-      <div class="card" routerLink="/songs">
-        <div class="icon">🎵</div>
-        <div class="title">Songs</div>
-      </div>
-
-      <div class="card" routerLink="/artists">
-        <div class="icon">🎤</div>
-        <div class="title">Artists</div>
-      </div>
-
-      <div class="card" routerLink="/albums">
-        <div class="icon">💿</div>
-        <div class="title">Albums</div>
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-
-    `
+  imports: [CommonModule, RouterLink], 
+  templateUrl: './home.component.html',
+  styleUrl: './home.css'
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  concerts: MusicEvent[] = [];
+  isConcertsLoading: boolean = true;
+
+  constructor(
+    private concertService: ConcertService, 
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object // 3. 👈 Inietta il controllo del tipo di piattaforma
+  ) {}
+
+  ngOnInit(): void {
+    // 4. 👈 Avvia il caricamento SOLO se l'app sta girando nel browser dell'utente (evita i bug del server)
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadConcerts();
+    }
+  }
+
+  loadConcerts(): void {
+    this.isConcertsLoading = true;
+    this.concertService.getUpcomingConcerts().subscribe({
+      next: (data) => {
+        this.concerts = data;
+        this.isConcertsLoading = false;
+        this.cdr.detectChanges(); // Sveglia il rendering di Angular
+      },
+      error: (err) => {
+        console.error('Errore nel caricamento dei concerti:', err);
+        this.isConcertsLoading = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+}
