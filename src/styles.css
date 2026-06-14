@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+/* RESET GLOBALE DEL BROWSER */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #14181c; /* Applica lo sfondo scuro a TUTTO lo schermo */
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Applica il reset anche al tag radice di Angular */
+app-root {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #14181c;
+}

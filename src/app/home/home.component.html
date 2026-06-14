@@ -28,22 +28,22 @@
       <p class="section-subtitle">I prossimi eventi live da non perdere nei prossimi giorni</p>
     </div>
 
-    @if (isConcertsLoading) {
+    @if (isConcertsLoading()) {
       <div class="loading-state">
         <p>Caricamento dei concerti in corso...</p>
       </div>
     }
 
-    @if (!isConcertsLoading && concerts.length === 0) {
+    @if (!isConcertsLoading() && concerts().length === 0) {
       <div class="empty-state">
         <p>Nessun concerto trovato per i prossimi giorni. Riprova più tardi!</p>
       </div>
     }
 
-    @if (!isConcertsLoading && concerts.length > 0) {
+    @if (!isConcertsLoading() && concerts().length > 0) {
       <div class="concerts-grid">
         
-        @for (concert of concerts; track concert.id) {
+        @for (concert of concerts(); track concert.id) {
           <div class="concert-card">
             
             <div class="card-image-wrapper">
