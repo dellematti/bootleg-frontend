@@ -11,19 +11,19 @@ import { MusicEvent } from '../models/event';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit { // 👈 Torniamo a usare l'interfaccia OnInit
+export class HomeComponent implements OnInit { 
   
-  // 🚦 I nostri fantastici Segnali Reattivi
+  
   concerts = signal<MusicEvent[]>([]);
   isConcertsLoading = signal<boolean>(true);
 
   constructor(
     private concertService: ConcertService,
-    @Inject(PLATFORM_ID) private platformId: Object // 👈 Identifica se siamo su server o browser
+    @Inject(PLATFORM_ID) private platformId: Object // Identifica se siamo su server o browser
   ) {}
 
   ngOnInit(): void {
-    // 🚀 SICUREZZA ASSOLUTA: Controlla il browser nell'istante esatto in cui il componente si sveglia
+    // SICUREZZA ASSOLUTA: Controlla il browser nell'istante esatto in cui il componente si sveglia
     if (isPlatformBrowser(this.platformId)) {
       console.log('=== [DEBUG] Siamo nel Browser. Avvio il caricamento dei concerti... ===');
       this.loadConcerts();
