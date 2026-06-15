@@ -1,72 +1,92 @@
-<div class="home-container">
+<div class="home-viewport">
 
-  <header class="hero-section">
-    <h1>Music App</h1>
-    <p class="subtitle">Scegli una sezione</p>
-
-    <div class="cards">
-      <div class="card" routerLink="/songs">
-        <div class="icon">🎵</div>
-        <div class="title">Songs</div>
-      </div>
-      <div class="card" routerLink="/artists">
-        <div class="icon">🎤</div>
-        <div class="title">Artists</div>
-      </div>
-      <div class="card" routerLink="/albums">
-        <div class="icon">💿</div>
-        <div class="title">Albums</div>
-      </div>
+  <header class="filter-zone">
+    <div class="chips-container">
+      <button class="nav-chip" routerLink="/songs">🎵 Brani</button>
+      <button class="nav-chip" routerLink="/artists">🎤 Artisti</button>
+      <button class="nav-chip" routerLink="/albums">💿 Album</button>
     </div>
   </header>
 
-  <hr class="section-divider">
+  <section class="spotlight-section">
+    <div class="spotlight-card">
+      <div class="spotlight-overlay"></div>
+      <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=cover" alt="Featured Tour" class="spotlight-bg">
+      
+      <div class="spotlight-info">
+        <span class="spotlight-tag">In Evidenza</span>
+        <h2>I grandi tour del 2026</h2>
+        <p>Le line-up più attese e i biglietti in esaurimento per i festival estivi in Italia.</p>
+        <button class="spotlight-btn">Scopri gli eventi</button>
+      </div>
+    </div>
 
-  <main class="content-section">
-    <div class="section-header">
-      <h2>🎤 Concerti in arrivo in Italia</h2>
-      <p class="section-subtitle">I prossimi eventi live da non perdere nei prossimi giorni</p>
+    <div class="quick-stats-panel">
+      <div class="stat-box">
+        
+        <div>
+          <h4>Trend della settimana</h4>
+          <p>Milano Open Air</p>
+        </div>
+      </div>
+      <div class="stat-box">
+        
+        <div>
+          <h4>Ultimo aggiornamento</h4>
+          <p>Pochi minuti fa</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="events-section">
+    
+    <div class="events-header">
+      <div class="header-title-group">
+        <span class="live-dot"></span>
+        <h3>Prossimi concerti in Italia</h3>
+      </div>
+      <span class="events-count">{{ concerts().length }} eventi sincronizzati</span>
     </div>
 
     @if (isConcertsLoading()) {
-      <div class="loading-state">
-        <p>Caricamento dei concerti in corso...</p>
+      <div class="state-placeholder">
+        <div class="loading-bar"></div>
+        <p>Sincronizzazione con Ticketmaster...</p>
       </div>
     }
 
     @if (!isConcertsLoading() && concerts().length === 0) {
-      <div class="empty-state">
-        <p>Nessun concerto trovato per i prossimi giorni. Riprova più tardi!</p>
+      <div class="state-placeholder">
+        <p>Nessun concerto trovato per i prossimi giorni.</p>
       </div>
     }
 
     @if (!isConcertsLoading() && concerts().length > 0) {
-      <div class="concerts-grid">
-        
+      <div class="gallery-grid">
         @for (concert of concerts(); track concert.id) {
-          <div class="concert-card">
+          <article class="concert-poster">
             
-            <div class="card-image-wrapper">
-              <img [src]="concert.imageUrl" [alt]="concert.name" class="concert-img">
-              <span class="city-badge">📍 {{ concert.city }}</span>
+            <div class="poster-media">
+              <img [src]="concert.imageUrl" [alt]="concert.name">
+              <span class="badge-city">📍 {{ concert.city }}</span>
             </div>
 
-            <div class="card-body">
-              <h3 class="concert-title" [title]="concert.name">{{ concert.name }}</h3>
+            <div class="poster-data">
+              <h4 [title]="concert.name">{{ concert.name }}</h4>
               
-              <div class="concert-details">
-                <p class="detail-item">📅 {{ concert.date }}</p>
-                <p class="detail-item venue" [title]="concert.venue">🏛️ {{ concert.venue }}</p>
+              <div class="poster-meta-rows">
+                <p class="meta-txt">📅 {{ concert.date }}</p>
+                <p class="meta-txt venue" [title]="concert.venue">🏛️ {{ concert.venue }}</p>
               </div>
 
-              <a [href]="concert.ticketUrl" target="_blank" class="btn-tickets">
-                Acquista Biglietti
+              <a [href]="concert.ticketUrl" target="_blank" class="btn-action">
+                Biglietti
               </a>
             </div>
 
-          </div>
+          </article>
         }
-
       </div>
     }
   </main>

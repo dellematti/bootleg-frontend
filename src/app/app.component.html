@@ -1,0 +1,72 @@
+<nav class="navbar">
+  <div class="nav-container">
+    
+    <!-- SINISTRA: Logo Icona + Testo Bicolore (Senza Punto) -->
+    <div class="nav-left">
+      <a routerLink="/" class="brand-logo">
+        
+        <!-- Icona Onde Sonore / Live Equalizer in puro SVG Neon Green -->
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="9" width="2.8" height="6" rx="1.4" fill="#00c030"/>
+          <rect x="8" y="5" width="2.8" height="14" rx="1.4" fill="#00c030"/>
+          <rect x="13" y="2" width="2.8" height="20" rx="1.4" fill="#00c030"/>
+          <rect x="18" y="7" width="2.8" height="10" rx="1.4" fill="#00c030"/>
+        </svg>
+
+        <!-- Testo Spezzato: Boot (Bianco) leg (Verde) -->
+        <span class="logo-text">Boot<span class="logo-accent">leg</span></span>
+      </a>
+    </div>
+
+    <!-- DESTRA: Autenticazione & Stato Utente -->
+    <div class="nav-right">
+      <ng-container *ngIf="authService.authVm$ | async as auth">
+        <ng-container *ngIf="auth.initialized; else loading">
+
+          <!-- UTENTE LOGGATO -->
+          <div *ngIf="auth.loggedIn; else loggedOut" class="user-profile-zone">
+            <span class="user-greeting">
+              Ciao, <strong>{{ auth.user?.username }}</strong>
+            </span>
+            <button (click)="logout()" class="btn-logout">Logout</button>
+          </div>
+
+          <!-- UTENTE NON LOGGATO -->
+          <ng-template #loggedOut>
+            <a routerLink="/login" class="btn-login">Login</a>
+          </ng-template>
+
+        </ng-container>
+        <ng-template #loading>
+          <div class="nav-shimmer">Inizializzazione...</div>
+        </ng-template>
+      </ng-container>
+    </div>
+
+  </div>
+</nav>
+
+<main class="page-content">
+  <router-outlet></router-outlet>
+</main>
+
+
+<footer class="app-footer">
+  <div class="footer-container">
+    
+    <div class="footer-left">
+      <p class="footer-copyright">© 2026 Bootleg. Tutti i diritti riservati.</p>
+      <p class="footer-tagline">Radar di concerti ed eventi live in tempo reale.</p>
+    </div>
+
+    <div class="footer-right">
+      <ul class="footer-navigation">
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/songs">Brani</a></li>
+        <li><a routerLink="/artists">Artisti</a></li>
+        <li><a routerLink="/albums">Album</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>

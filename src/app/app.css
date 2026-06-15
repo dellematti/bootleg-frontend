@@ -1,127 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* 🪄 TRUCCO STRUTTURALE (Sticky Footer)
+   Dice ad Angular di comportarsi come un contenitore verticale elastico */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- THE NAVBAR --- */
 .navbar {
-
-  margin: 0 auto;
-
-  position: fixed;         
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: rgba(26, 30, 36, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #2d3442;
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
-  box-sizing: border-box;
-
-  height: 50px;             
-  background: #111;        
-
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
-
-  padding: 0 40px;
-
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-
   z-index: 1000;
-}
-
-/* LINK */
-.home-link {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Arial, sans-serif;
-}
-/* per ora uguale al login di home */
-.login-link {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Arial, sans-serif;
-}
-
-/* hover leggero */
-.home-link:hover {
-  opacity: 0.8;
-}
-
-
-.content {
-  margin-top: 60px; /* spazio navbar */
-  padding: 20px;
-}
-
-
-
-.nav-left {
-  display: flex;
-}
-
-
-.nav-right {
+  width: 100%;
+  height: 70px;
   display: flex;
   align-items: center;
-  gap: 15px;            /* spazio tra username e logout */
+  box-sizing: border-box;
+  flex-shrink: 0; /* Evita che la navbar si schiacci */
 }
 
-
-/* username */
-.nav-right span {
-  color: white;
-  font-size: 15px;
-  font-family: Arial, sans-serif;
-  opacity: 0.9;
+.nav-container,
+.footer-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-/* bottone logout */
-.nav-right button {
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- BRAND LOGO --- */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.02);
+}
+
+.brand-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+}
+
+.logo-text .logo-accent {
+  color: #00c030;
+  font-weight: 700;
+}
+
+/* --- NAV USER & ACTIONS --- */
+.user-profile-zone {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-greeting {
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+
+.user-greeting strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn-login {
+  background: #ffffff;
+  color: #1a1e24;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.btn-login:hover {
+  background: #e1e7ef;
+  transform: translateY(-1px);
+}
+
+.btn-logout {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.5);
-
-  color: white;
-  padding: 5px 10px;
-
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-
+  border: 1px solid #3a4454;
+  color: #94a3b8;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
-
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
-/* hover */
-.nav-right button:hover {
-  background-color: white;
-  color: #111;
-  border-color: white;
+.btn-logout:hover {
+  border-color: #ef4444;
+  color: #ffffff;
+  background: rgba(239, 68, 68, 0.05);
 }
 
+.nav-shimmer {
+  font-size: 0.82rem;
+  color: #64748b;
+}
 
-.user-section {
+/* --- CONTENITORE CONTENUTI (ELASTICO) --- */
+.page-content {
+  background-color: #1a1e24;
+  width: 100%;
+  flex: 1 0 auto; /* 🚀 Prende tutto lo spazio disponibile spingendo giù il footer */
+}
+
+/* ========================================================= */
+/* 🌟 THE BOOTLEG FOOTER DESIGN                               */
+/* ========================================================= */
+.app-footer {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #13161b; /* Più scuro della home per dare l'effetto chiusura */
+  border-top: 1px solid #252b36; /* Linea sottile di separazione */
+  padding: 32px 0;
+  width: 100%;
+  flex-shrink: 0; /* Impedisce al footer di deformarsi */
+  box-sizing: border-box;
+}
+
+.footer-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  flex-wrap: wrap; /* Adattabilità automatica su smartphone */
+  gap: 20px;
 }
 
-/* username */
-.user-section span {
-  color: white;
-  font-size: 15px;
-  font-family: Arial, sans-serif;
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
+.footer-copyright {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #8c9ba5;
+  margin: 0;
+}
 
-.logout-link {
-  color: white;
+.footer-tagline {
+  font-size: 0.75rem;
+  color: #526070;
+  margin: 0;
+}
+
+/* Menu link interni del footer */
+.footer-navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 24px;
+}
+
+.footer-navigation a {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #627488;
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: Arial, sans-serif;
-
-  cursor: pointer;
+  transition: color 0.15s ease;
 }
 
+/* I link si accendono del verde neon iconico quando ci passi sopra */
+.footer-navigation a:hover {
+  color: #00c030;
+}
 
-.logout-link:hover {
-  opacity: 0.8;
+/* Responsive per schermi piccoli */
+@media (max-width: 650px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-navigation {
+    justify-content: center;
+    gap: 16px;
+  }
 }
