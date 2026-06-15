@@ -1,50 +1,83 @@
-<div class="login-container">
+<div class="login-viewport">
+  <!-- EFFETTO DI LUCE SOFFUSA DI SFONDO -->
+  <div class="login-ambient-glow"></div>
 
   <div class="login-card">
+    
+    <!-- HEADER DELLA SCHEDA: Il Brand Bootleg -->
+    <div class="card-header">
+      <div class="mini-logo">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="9" width="2.8" height="6" rx="1.4" fill="#00c030"/>
+          <rect x="8" y="5" width="2.8" height="14" rx="1.4" fill="#00c030"/>
+          <rect x="13" y="2" width="2.8" height="20" rx="1.4" fill="#00c030"/>
+          <rect x="18" y="7" width="2.8" height="10" rx="1.4" fill="#00c030"/>
+        </svg>
+        <span class="logo-text">Boot<span class="logo-accent">leg</span></span>
+      </div>
+      <h2>Unisciti al pit</h2>
+      <p class="subtitle">Crea un account per tracciare i tuoi concerti e i tuoi brani preferiti.</p>
+    </div>
 
-    <h2 class="login-title">Registrati</h2>
-
-    <form (ngSubmit)="onRegister()">
-
+    <!-- FORM FUNZIONANTE CON INTERCETTAZIONE ONREGISTER -->
+    <form class="login-form" (ngSubmit)="onRegister()">
+      
+      <!-- USERNAME -->
       <div class="form-group">
-        <label>Username</label>
-        <input
-          type="text"
-          [(ngModel)]="request.username"
-          name="username"
-          required
-        />
+        <label for="username">Username</label>
+        <div class="input-wrapper">
+          <span class="input-icon">👤</span>
+          <input
+            id="username"
+            type="text"
+            [(ngModel)]="request.username"
+            name="username"
+            placeholder="Scegli il tuo username"
+            required
+          />
+        </div>
       </div>
 
+      <!-- PASSWORD -->
       <div class="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          [(ngModel)]="request.password"
-          name="password"
-          required
-        />
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🔒</span>
+          <input
+            id="password"
+            type="password"
+            [(ngModel)]="request.password"
+            name="password"
+            placeholder="Crea una password sicura"
+            required
+          />
+        </div>
       </div>
 
-      <button type="submit">Registrati</button>
+      <!-- 🟩 MESSAGGIO DI SUCCESS (*ngIf) -->
+      <div class="success-message" *ngIf="successMessage">
+        <span>✅</span> {{ successMessage }}
+      </div>
+
+      <!-- 🟥 MESSAGGIO DI ERRORE (*ngIf) -->
+      <div class="error-message" *ngIf="errorMessage">
+        <span>⚠️</span> {{ errorMessage }}
+      </div>
+
+      <!-- BOTTONE SUBMIT -->
+      <button type="submit" class="btn-submit">
+        Registrati
+      </button>
 
     </form>
 
-    <!-- success -->
-    <p class="success" *ngIf="successMessage">
-      {{ successMessage }}
-    </p>
-
-    <!-- errore -->
-    <p class="error" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </p>
-
-    <p class="register-link">
-      Hai già un account?
-      <a routerLink="/login">Login</a>
-    </p>
+    <!-- FOOTER PER CHI HA GIÀ UN ACCOUNT -->
+    <div class="card-footer">
+      <p>
+        Hai già un account? 
+        <a routerLink="/login" class="register-link">Accedi</a>
+      </p>
+    </div>
 
   </div>
-
 </div>
