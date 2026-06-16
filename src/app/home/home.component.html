@@ -1,5 +1,6 @@
 <div class="home-viewport">
 
+  <!-- FILTRI RAPIDI COMPATTI -->
   <header class="filter-zone">
     <div class="chips-container">
       <button class="nav-chip" routerLink="/songs">🎵 Brani</button>
@@ -8,83 +9,93 @@
     </div>
   </header>
 
-  <section class="spotlight-section">
-    <div class="spotlight-card">
-      <div class="spotlight-overlay"></div>
-      <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=cover" alt="Featured Tour" class="spotlight-bg">
-      
-      <div class="spotlight-info">
-        <span class="spotlight-tag">In Evidenza</span>
-        <h2>I grandi tour del 2026</h2>
-        <p>Le line-up più attese e i biglietti in esaurimento per i festival estivi in Italia.</p>
-        <button class="spotlight-btn">Scopri gli eventi</button>
-      </div>
-    </div>
-
-    <div class="quick-stats-panel">
-      <div class="stat-box">
+  <!-- 🌟 HERO CARD A TUTTA LARGHEZZA CON IMMAGINE DI SFONDO -->
+  <section class="hero-dashboard-full">
+    <div class="search-hero-card immersive-bg">
+      <div class="hero-overlay-content">
+        <span class="hero-badge">Il tuo diario dei live</span>
+        <h1>Conserva la memoria dei tuoi concerti.</h1>
+        <p>Crea il tuo archivio personale, tieni il conto dei live visti e scopri quando i tuoi artisti preferiti tornano sul palco.</p>
         
-        <div>
-          <h4>Trend della settimana</h4>
-          <p>Milano Open Air</p>
-        </div>
-      </div>
-      <div class="stat-box">
-        
-        <div>
-          <h4>Ultimo aggiornamento</h4>
-          <p>Pochi minuti fa</p>
+        <!-- La barra di ricerca reale con il tuo metodo RxJS (input) e il riferimento #searchBox -->
+        <div class="hero-search-bar">
+          <span class="search-icon">🔍</span>
+          <input 
+            #searchBox
+            type="text" 
+            placeholder="Cerca un artista per aggiungerlo ai tuoi live..."
+            (input)="search($event)"
+          />
         </div>
       </div>
     </div>
   </section>
 
-  <main class="events-section">
+  <!-- 🚀 SEZIONE DINAMICA: SE L'UTENTE STA SCRIVENDO, MOSTRA I RISULTATI DELLA RICERCA -->
+  <div class="results-viewport-container" *ngIf="searchBox.value">
+    
+    <div class="events-header">
+      <div class="header-title-group">
+        <span class="search-dot"></span>
+        <h3>Risultati della ricerca per "{{ searchBox.value }}"</h3>
+      </div>
+    </div>
+
+    <div class="results-container" *ngIf="artists$ | async as artists; else loadingSearch">
+      <!-- Se ci sono artisti, carica il tuo componente custom inserendo la lista -->
+      <app-artist-grid *ngIf="artists.length > 0" [artists]="artists"></app-artist-grid>
+
+      <!-- Stato vuoto della ricerca -->
+      <div class="state-placeholder" *ngIf="artists.length === 0">
+        <p>Nessun artista trovato per "{{ searchBox.value }}"</p>
+      </div>
+    </div>
+
+    <!-- Semplice feedback visivo mentre switchMap lavora -->
+    <ng-template #loadingSearch>
+      <div class="state-placeholder">
+        <p>Ricerca in corso...</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- 🏛️ SEZIONE STATO INIZIALE: SE L'INPUT È VUOTO, MOSTRA I CONCERTI IN ITALIA -->
+  <main class="events-section" *ngIf="!searchBox.value">
     
     <div class="events-header">
       <div class="header-title-group">
         <span class="live-dot"></span>
         <h3>Prossimi concerti in Italia</h3>
       </div>
-      <span class="events-count">{{ concerts().length }} eventi sincronizzati</span>
+      <span class="events-count">{{ concerts().length }} eventi trovati</span>
     </div>
 
+    <!-- Loading Concerti -->
     @if (isConcertsLoading()) {
       <div class="state-placeholder">
-        <div class="loading-bar"></div>
-        <p>Sincronizzazione con Ticketmaster...</p>
+        <p>Sincronizzazione con i database live...</p>
       </div>
     }
 
-    @if (!isConcertsLoading() && concerts().length === 0) {
-      <div class="state-placeholder">
-        <p>Nessun concerto trovato per i prossimi giorni.</p>
-      </div>
-    }
-
+    <!-- Griglia dei Concerti standard -->
     @if (!isConcertsLoading() && concerts().length > 0) {
       <div class="gallery-grid">
         @for (concert of concerts(); track concert.id) {
           <article class="concert-poster">
-            
             <div class="poster-media">
               <img [src]="concert.imageUrl" [alt]="concert.name">
               <span class="badge-city">📍 {{ concert.city }}</span>
             </div>
-
             <div class="poster-data">
               <h4 [title]="concert.name">{{ concert.name }}</h4>
-              
               <div class="poster-meta-rows">
                 <p class="meta-txt">📅 {{ concert.date }}</p>
                 <p class="meta-txt venue" [title]="concert.venue">🏛️ {{ concert.venue }}</p>
               </div>
-
               <a [href]="concert.ticketUrl" target="_blank" class="btn-action">
                 Biglietti
               </a>
             </div>
-
           </article>
         }
       </div>

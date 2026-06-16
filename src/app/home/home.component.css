@@ -1,18 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap');
 
-/* --- CONTENITORE AD ALTO BILANCIAMENTO --- */
 .home-viewport {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #1a1e24; /* Grigio fumo premium, non cupo */
+  background-color: #1a1e24;
   color: #e1e7ef;
   min-height: 100vh;
   padding: 20px 0 60px 0;
   box-sizing: border-box;
 }
 
-/* 🚀 CENTRATURA SIMMETRICA: Impedisce al sito di svuotarsi al centro */
 .filter-zone,
-.spotlight-section,
+.hero-dashboard-full,
+.results-viewport-container,
 .events-section {
   max-width: 1100px;
   margin: 0 auto;
@@ -21,16 +20,9 @@
   box-sizing: border-box;
 }
 
-/* --- BARRA FILTRI CHIPS (SOTTO NAVBAR) --- */
-.filter-zone {
-  margin-bottom: 30px;
-}
-
-.chips-container {
-  display: flex;
-  gap: 10px;
-}
-
+/* --- BARRA FILTRI CHIPS --- */
+.filter-zone { margin-bottom: 24px; }
+.chips-container { display: flex; gap: 10px; }
 .nav-chip {
   background: #222731;
   border: 1px solid #2d3442;
@@ -40,160 +32,126 @@
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.nav-chip:hover {
-  background: #2d3442;
-  color: #ffffff;
-  border-color: #404b5e;
-}
-
-/* --- NUOVA AREA SUPERIORE: SPOTLIGHT (Layout 2 Colonne Bilanciato) --- */
-.spotlight-section {
-  display: grid;
-  grid-template-columns: 2fr 1fr; /* Banner grande a sx, info a dx */
-  gap: 20px;
-  margin-bottom: 45px;
-}
-
-.spotlight-card {
-  background: #222731;
   border: 1px solid #2d3442;
-  border-radius: 12px;
-  height: 220px;
+}
+
+/* ========================================================= */
+/* 🎆 DESIGN DELLA HERO CON IMMAGINE DI SFONDO SFUMATA      */
+/* ========================================================= */
+.hero-dashboard-full {
+  margin-bottom: 40px;
+}
+
+.search-hero-card.immersive-bg {
   position: relative;
+  border-radius: 16px;
   overflow: hidden;
+  border: 1px solid #2d3442;
+  
+  /* L'immagine sfuma verso sinistra diventando scura per non coprire i testi */
+  background-image: 
+    linear-gradient(to right, #222731 35%, rgba(34, 39, 49, 0.9) 60%, rgba(34, 39, 49, 0.4) 100%), 
+    url('https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1200&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center right;
+  padding: 48px;
+  box-sizing: border-box;
+  min-height: 300px;
   display: flex;
   align-items: center;
-  padding: 30px;
-  box-sizing: border-box;
 }
 
-.spotlight-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.15; /* Sfumata elegantemente */
-}
-
-.spotlight-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #222731 40%, rgba(34,39,49,0) 100%);
-  z-index: 1;
-}
-
-.spotlight-info {
+.hero-overlay-content {
+  max-width: 580px;
   position: relative;
   z-index: 2;
-  max-width: 420px;
 }
 
-.spotlight-tag {
-  font-size: 0.65rem;
+.hero-badge {
+  font-size: 0.68rem;
   font-weight: 800;
   background: rgba(0, 192, 48, 0.15);
   color: #00c030;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  display: inline-block;
+  margin-bottom: 16px;
 }
 
-.spotlight-info h2 {
-  font-size: 1.6rem;
+.hero-overlay-content h1 {
+  font-size: 2.2rem;
   font-weight: 800;
   color: #ffffff;
-  margin: 10px 0 6px 0;
-  letter-spacing: -0.02em;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
-.spotlight-info p {
-  font-size: 0.85rem;
-  color: #94a3b8;
-  margin: 0 0 16px 0;
-  line-height: 1.4;
+.hero-overlay-content p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  margin: 0 0 28px 0;
+  line-height: 1.5;
 }
 
-.spotlight-btn {
-  background: #ffffff;
-  color: #1a1e24;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-
-/* Pannello Statistiche Destro (Bilancia l'effetto vuoto) */
-.quick-stats-panel {
+/* INPUT DI RICERCA REATTIVO */
+.hero-search-bar {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.stat-box {
-  background: #222731;
-  border: 1px solid #2d3442;
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
+  background: rgba(26, 30, 36, 0.95);
+  border: 1px solid #3a4454;
+  border-radius: 10px;
+  padding: 14px 18px;
   align-items: center;
   gap: 14px;
-  flex-grow: 1;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
 }
 
-.stat-emoji { font-size: 1.5rem; }
-.stat-box h4 { margin: 0; font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.02em; }
-.stat-box p { margin: 2px 0 0 0; font-size: 0.95rem; color: #ffffff; font-weight: 700; }
+.hero-search-bar:focus-within {
+  border-color: #00c030;
+  box-shadow: 0 0 0 4px rgba(0, 192, 48, 0.15);
+}
 
-/* --- SEZIONE LISTA CONCERTI --- */
+.search-icon { color: #64748b; font-size: 1.1rem; }
+
+.hero-search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+}
+.hero-search-bar input::placeholder { color: #4f5e71; }
+
+/* ========================================================= */
+/* 🏛️ SEZIONE GRIGLIE (CONCERTI & STRUTTURA)                 */
+/* ========================================================= */
 .events-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #2d3442;
   padding-bottom: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.header-title-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.header-title-group { display: flex; align-items: center; gap: 8px; }
+.search-dot { width: 7px; height: 7px; background: #40bcf4; border-radius: 50%; }
+.live-dot { width: 7px; height: 7px; background: #00c030; border-radius: 50%; }
+.events-header h3 { font-size: 1.1rem; font-weight: 700; color: #ffffff; margin: 0; }
+.events-count { font-size: 0.75rem; color: #64748b; }
 
-.live-dot {
-  width: 7px;
-  height: 7px;
-  background: #00c030;
-  border-radius: 50%;
-}
-
-.events-header h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-}
-
-.events-count {
-  font-size: 0.75rem;
-  color: #64748b;
-}
-
-/* GRIGLIA COMPATTA SIMMETRICA */
+/* GRIGLIA COMPATTA TICKETMASTER */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
   gap: 16px;
 }
 
-/* CARD POSTER */
 .concert-poster {
   background: #222731;
   border: 1px solid #2d3442;
@@ -201,27 +159,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition: all 0.15s ease;
 }
-
-.concert-poster:hover {
-  border-color: #404b5e;
-  transform: translateY(-2px);
-}
-
-.poster-media {
-  position: relative;
-  width: 100%;
-  height: 110px;
-  background: #1a1e24;
-}
-
-.poster-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+.concert-poster:hover { border-color: #404b5e; transform: translateY(-2px); }
+.poster-media { position: relative; width: 100%; height: 110px; background: #1a1e24; }
+.poster-media img { width: 100%; height: 100%; object-fit: cover; }
 .badge-city {
   position: absolute;
   top: 8px;
@@ -234,47 +176,18 @@
   color: #40bcf4;
 }
 
-/* Dati */
-.poster-data {
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
+.poster-data { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
 .poster-data h4 {
   font-size: 0.85rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0 0 8px 0;
   line-height: 1.3;
-  height: 2.6em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
+.poster-meta-rows { margin-bottom: 12px; flex-grow: 1; }
+.meta-txt { margin: 2px 0; font-size: 0.72rem; color: #94a3b8; }
+.meta-txt.venue { color: #64748b; }
 
-.poster-meta-rows {
-  margin-bottom: 12px;
-  flex-grow: 1;
-}
-
-.meta-txt {
-  margin: 2px 0;
-  font-size: 0.72rem;
-  color: #94a3b8;
-}
-
-.meta-txt.venue {
-  color: #64748b;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 160px;
-}
-
-/* BOTTONE INTEGRATO */
 .btn-action {
   display: block;
   text-align: center;
@@ -288,18 +201,6 @@
   font-size: 0.75rem;
   transition: all 0.15s ease;
 }
+.concert-poster:hover .btn-action { background: #00c030; border-color: #00c030; }
 
-.concert-poster:hover .btn-action {
-  background: #00c030;
-  border-color: #00c030;
-}
-
-/* STATI LOADING */
-.state-placeholder {
-  text-align: center;
-  padding: 40px;
-  background: #222731;
-  border-radius: 8px;
-  color: #64748b;
-  font-size: 0.8rem;
-}
+.state-placeholder { text-align: center; padding: 40px; background: #222731; border-radius: 8px; color: #64748b; font-size: 0.85rem; }

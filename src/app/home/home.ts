@@ -1,46 +1,75 @@
-import { Component, OnInit, Inject, PLATFORM_ID, signal } from '@angular/core'; // 👈 Aggiungiamo OnInit, Inject e PLATFORM_ID
-import { CommonModule, isPlatformBrowser } from '@angular/common'; // 👈 Riprendiamo isPlatformBrowser
+import { Component, OnInit, Inject, PLATFORM_ID, signal } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Subject, Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
+// I tuoi servizi e modelli esistenti
 import { ConcertService } from '../services/concert.service';
+import { ArtistService } from '../services/artist.service';
 import { MusicEvent } from '../models/event';
+import { Artist } from '../models/artist';
+
+// Il componente griglia che hai già creato
+import { ArtistGridComponent } from '../artists//artist-grid.component'; 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink], 
+  imports: [CommonModule, RouterLink, ArtistGridComponent], // 👈 Importiamo la tua griglia artisti qui
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit { 
   
-  
+  // 1. Gestione Concerti in Italia (Signal)
   concerts = signal<MusicEvent[]>([]);
   isConcertsLoading = signal<boolean>(true);
 
+  // 2. Gestione Ricerca Interattiva Artisti (RxJS)
+  private searchTerms = new Subject<string>();
+  artists$!: Observable<Artist[]>; 
+
   constructor(
     private concertService: ConcertService,
-    @Inject(PLATFORM_ID) private platformId: Object // Identifica se siamo su server o browser
+    private artistService: ArtistService, // 👈 Iniettiamo il tuo servizio artisti
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
-    // SICUREZZA ASSOLUTA: Controlla il browser nell'istante esatto in cui il componente si sveglia
+    // Inizializziamo il tubo di ricerca RxJS
+    this.artists$ = this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => {
+        if (!term.trim()) {
+          return of([]); // Se l'input è vuoto restituisce un array vuoto immediatamente
+        }
+        return this.artistService.searchArtists(term);
+      })
+    );
+
+    // Caricamento dei concerti Ticketmaster se siamo nel browser
     if (isPlatformBrowser(this.platformId)) {
-      console.log('=== [DEBUG] Siamo nel Browser. Avvio il caricamento dei concerti... ===');
       this.loadConcerts();
     }
   }
 
+  // Il tuo metodo di input reattivo
+  search(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchTerms.next(inputElement.value); 
+  }
+
   loadConcerts(): void {
     this.isConcertsLoading.set(true);
-
     this.concertService.getUpcomingConcerts().subscribe({
       next: (data) => {
-        console.log('=== [DEBUG] Dati ricevuti da Spring Boot: ===', data);
-        this.concerts.set(data); // Aggiorna il segnale dei concerti
-        this.isConcertsLoading.set(false); // Spegne il caricamento
+        this.concerts.set(data);
+        this.isConcertsLoading.set(false);
       },
       error: (err) => {
-        console.error('=== [DEBUG] Errore di rete/CORS: ===', err);
+        console.error('Errore di rete/CORS:', err);
         this.isConcertsLoading.set(false);
       }
     });
