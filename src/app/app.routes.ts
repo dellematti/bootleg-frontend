@@ -17,12 +17,14 @@ import { LoginComponent } from './login/login';
 import { RegisterComponent } from './register/register.component';
 
 import { authGuard } from './guards/auth.guard';
+import { ArtistDetailComponent } from './artists/artist-detail/artist.detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },            // TODO : da rimuovere (prova)
   { path: 'songs', component: SongsComponent, canActivate: [authGuard]  },
   { path: 'artists', component: ArtistSearchComponent, canActivate: [authGuard]  },
   // { path: 'artists', component: ArtistSearchComponent  },
+  { path: 'artist/:id', component: ArtistDetailComponent },
   { path: 'albums', component: AlbumsComponent, canActivate: [authGuard]  },
   { path: 'albums/:id', component: AlbumDetailComponent, canActivate: [authGuard] },
  

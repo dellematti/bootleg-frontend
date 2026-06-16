@@ -1,206 +1,310 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-.home-viewport {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #1a1e24;
-  color: #e1e7ef;
+/* ========================================================= */
+/* 🖤 FONDAMENTA & LAYOUT (STILE CINEMATIC MINIMAL)          */
+/* ========================================================= */
+.bootleg-container {
+  font-family: 'Inter', sans-serif;
+  background-color: #14181c; /* Sfondo ardesia opaco tipico di Letterboxd */
+  color: #9aabbc; /* Testo secondario morbido a basso contrasto */
   min-height: 100vh;
-  padding: 20px 0 60px 0;
+  padding: 100px 24px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  align-items: center;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
 }
 
-.filter-zone,
-.hero-dashboard-full,
-.results-viewport-container,
-.events-section {
-  max-width: 1100px;
-  margin: 0 auto;
+/* 🌑 BACKDROP SATINATO (Sfocatura profonda ed elegante durante la ricerca) */
+.search-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 24, 28, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 98;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* ========================================================= */
+/* ✍️ HERO & BRANDING (Focus sulla tipografia)               */
+/* ========================================================= */
+.main-hero {
+  text-align: center;
+  max-width: 640px;
   width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-/* --- BARRA FILTRI CHIPS --- */
-.filter-zone { margin-bottom: 24px; }
-.chips-container { display: flex; gap: 10px; }
-.nav-chip {
-  background: #222731;
-  border: 1px solid #2d3442;
-  color: #94a3b8;
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid #2d3442;
-}
-
-/* ========================================================= */
-/* 🎆 DESIGN DELLA HERO CON IMMAGINE DI SFONDO SFUMATA      */
-/* ========================================================= */
-.hero-dashboard-full {
-  margin-bottom: 40px;
-}
-
-.search-hero-card.immersive-bg {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid #2d3442;
-  
-  /* L'immagine sfuma verso sinistra diventando scura per non coprire i testi */
-  background-image: 
-    linear-gradient(to right, #222731 35%, rgba(34, 39, 49, 0.9) 60%, rgba(34, 39, 49, 0.4) 100%), 
-    url('https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1200&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center right;
-  padding: 48px;
-  box-sizing: border-box;
-  min-height: 300px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  z-index: 99;
 }
 
-.hero-overlay-content {
-  max-width: 580px;
-  position: relative;
-  z-index: 2;
+.brand-title { 
+  font-size: 3.2rem; 
+  font-weight: 800; 
+  letter-spacing: -0.05em; 
+  margin: 0 0 12px 0; 
+  color: #ffffff; /* Titolo in bianco cristallino */
+  text-align: center;
 }
+/* Micro-accento arancione caldo cinematico */
+.brand-title .dot { color: #ff8000; } 
 
-.hero-badge {
-  font-size: 0.68rem;
-  font-weight: 800;
-  background: rgba(0, 192, 48, 0.15);
-  color: #00c030;
-  padding: 6px 10px;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  display: inline-block;
-  margin-bottom: 16px;
-}
-
-.hero-overlay-content h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0 0 12px 0;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-}
-
-.hero-overlay-content p {
-  font-size: 0.95rem;
-  color: #cbd5e1;
-  margin: 0 0 28px 0;
+.brand-subtitle { 
+  font-size: 1.05rem; 
+  color: #9aabbc; 
+  margin: 0 0 36px 0; 
   line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-/* INPUT DI RICERCA REATTIVO */
-.hero-search-bar {
+/* ========================================================= */
+/* 🔍 BARRA DI RICERCA (Trasparente, geometrica, pulita)     */
+/* ========================================================= */
+.search-wrapper { position: relative; width: 100%; }
+
+.search-input-field {
   display: flex;
-  background: rgba(26, 30, 36, 0.95);
-  border: 1px solid #3a4454;
-  border-radius: 10px;
-  padding: 14px 18px;
   align-items: center;
-  gap: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  transition: all 0.2s ease;
+  gap: 16px;
+  background: rgba(28, 37, 45, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Bordo millimetrico */
+  border-radius: 6px; /* Angoli netti e professionali */
+  padding: 16px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
 }
-
-.hero-search-bar:focus-within {
-  border-color: #00c030;
-  box-shadow: 0 0 0 4px rgba(0, 192, 48, 0.15);
+.search-input-field:focus-within {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: #1c252d;
 }
-
-.search-icon { color: #64748b; font-size: 1.1rem; }
-
-.hero-search-bar input {
+.search-icon { font-size: 1rem; opacity: 0.4; color: #9aabbc; }
+.search-input-field input {
   flex: 1;
   background: transparent;
   border: none;
   color: #ffffff;
+  font-size: 1.05rem;
   font-family: inherit;
-  font-size: 0.95rem;
   outline: none;
 }
-.hero-search-bar input::placeholder { color: #4f5e71; }
+.search-input-field input::placeholder { color: #667788; }
 
 /* ========================================================= */
-/* 🏛️ SEZIONE GRIGLIE (CONCERTI & STRUTTURA)                 */
+/* 🎴 TENDINA RISULTATI ARTISTI                              */
 /* ========================================================= */
-.events-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #2d3442;
-  padding-bottom: 12px;
-  margin-bottom: 24px;
-}
-
-.header-title-group { display: flex; align-items: center; gap: 8px; }
-.search-dot { width: 7px; height: 7px; background: #40bcf4; border-radius: 50%; }
-.live-dot { width: 7px; height: 7px; background: #00c030; border-radius: 50%; }
-.events-header h3 { font-size: 1.1rem; font-weight: 700; color: #ffffff; margin: 0; }
-.events-count { font-size: 0.75rem; color: #64748b; }
-
-/* GRIGLIA COMPATTA TICKETMASTER */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-  gap: 16px;
-}
-
-.concert-poster {
-  background: #222731;
-  border: 1px solid #2d3442;
-  border-radius: 8px;
+.search-results-overlay {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: #1c252d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   overflow: hidden;
+  text-align: left;
+}
+
+.results-header {
+  padding: 12px 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #667788;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.artists-horizontal-carousel {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  overflow-x: auto;
+}
+.artists-horizontal-carousel::-webkit-scrollbar { height: 3px; }
+.artists-horizontal-carousel::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+
+.mini-artist-card {
+  flex: 0 0 90px;
   display: flex;
   flex-direction: column;
-  transition: all 0.15s ease;
-}
-.concert-poster:hover { border-color: #404b5e; transform: translateY(-2px); }
-.poster-media { position: relative; width: 100%; height: 110px; background: #1a1e24; }
-.poster-media img { width: 100%; height: 100%; object-fit: cover; }
-.badge-city {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(26, 30, 36, 0.85);
-  padding: 3px 6px;
-  border-radius: 4px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #40bcf4;
-}
-
-.poster-data { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; }
-.poster-data h4 {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 8px 0;
-  line-height: 1.3;
-}
-.poster-meta-rows { margin-bottom: 12px; flex-grow: 1; }
-.meta-txt { margin: 2px 0; font-size: 0.72rem; color: #94a3b8; }
-.meta-txt.venue { color: #64748b; }
-
-.btn-action {
-  display: block;
+  align-items: center;
   text-align: center;
-  background: transparent;
-  border: 1px solid #3a4454;
-  color: #ffffff;
-  text-decoration: none;
-  padding: 6px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.75rem;
-  transition: all 0.15s ease;
+  cursor: pointer;
 }
-.concert-poster:hover .btn-action { background: #00c030; border-color: #00c030; }
 
-.state-placeholder { text-align: center; padding: 40px; background: #222731; border-radius: 8px; color: #64748b; font-size: 0.85rem; }
+.artist-avatar-box {
+  width: 76px; 
+  height: 76px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #14181c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
+  transition: all 0.15s ease-out;
+}
+.mini-artist-card:hover .artist-avatar-box {
+  transform: scale(1.05);
+  border-color: #ff8000; /* L'accento arancione si attiva sull'hover dell'artista */
+}
+.artist-avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.mini-artist-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #9aabbc;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mini-artist-card:hover .mini-artist-name { color: #ffffff; }
+.search-state-info { padding: 32px 20px; text-align: center; color: #667788; font-size: 0.9rem; }
+
+/* ========================================================= */
+/* 🎟️ CAROSELLO CONCERTI (Widescreen Cinematografico 16:10)   */
+/* ========================================================= */
+.showcase-section { 
+  max-width: 980px; 
+  width: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  z-index: 10; 
+}
+.section-title-bar { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+.indicator-group { display: flex; align-items: center; gap: 8px; }
+.pulse-indicator { display: none; } /* Rimosso per pulizia estetica */
+
+.section-title-bar h2 { 
+  font-size: 1.05rem; 
+  font-weight: 600; 
+  color: #ffffff; 
+  margin: 0; 
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.swipe-hint { font-size: 0.75rem; color: #556677; font-weight: 500; }
+
+.posters-carousel { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px; }
+.posters-carousel::-webkit-scrollbar { display: none; }
+
+.compact-poster-card { 
+  flex: 0 0 260px; /* Larghezza aumentata per ospitare il formato panoramico */
+  width: 260px; 
+  display: flex; 
+  flex-direction: column;
+}
+
+.poster-image-box { 
+  position: relative; 
+  width: 100%; 
+  aspect-ratio: 16 / 10; /* Risolve il problema del ritaglio: si adatta nativamente ai banner musicali */
+  border-radius: 6px; 
+  overflow: hidden; 
+  background: #1c252d; 
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.15s ease-in-out;
+}
+.compact-poster-card:hover .poster-image-box {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.poster-image-box img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  object-position: center; 
+}
+
+.poster-location-tag { 
+  position: absolute; 
+  bottom: 8px; 
+  left: 8px; 
+  background: rgba(20, 24, 28, 0.85); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3px 8px; 
+  border-radius: 4px; 
+  font-size: 0.65rem; 
+  font-weight: 600; 
+  color: #ffffff; 
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  letter-spacing: 0.02em;
+}
+
+.poster-details { padding-top: 12px; display: flex; flex-direction: column; gap: 3px; }
+.poster-details h3 { 
+  font-size: 0.88rem; 
+  font-weight: 600; 
+  color: #ffffff; 
+  margin: 0; 
+  line-height: 1.3; 
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+.poster-date { margin: 0; font-size: 0.75rem; color: #667788; }
+.poster-link { 
+  font-size: 0.72rem; 
+  font-weight: 600; 
+  color: #ff8000; /* Link arancione raffinato ed elegante */
+  text-decoration: none; 
+  margin-top: 4px;
+}
+.poster-link:hover { text-decoration: underline; }
+
+/* ========================================================= */
+/* 📖 EXPLAINER GRID (Aria e minimalismo, senza scatolotti)  */
+/* ========================================================= */
+.features-explainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 48px;
+  max-width: 980px;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 50px;
+  margin-top: 10px;
+}
+.feature-box { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px; 
+  background: transparent; 
+  padding: 0; 
+  border-radius: 0;
+  border: none;
+}
+.feat-icon { font-size: 1.3rem; opacity: 0.8; }
+.feature-box h3 { font-size: 0.95rem; font-weight: 600; color: #ffffff; margin: 0; letter-spacing: -0.01em;}
+.feature-box p { font-size: 0.85rem; color: #8899aa; margin: 0; line-height: 1.5; }
+
+/* SHIMMER LOADING PLACEHOLDER */
+.loading-shimmer {
+  padding: 40px;
+  text-align: center;
+  color: #667788;
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

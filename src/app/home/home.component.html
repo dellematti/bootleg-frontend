@@ -1,99 +1,87 @@
-<div class="home-viewport">
+<div class="bootleg-container">
 
-  <!-- FILTRI RAPIDI COMPATTI -->
-  <header class="filter-zone">
-    <div class="chips-container">
-      <button class="nav-chip" routerLink="/songs">🎵 Brani</button>
-      <button class="nav-chip" routerLink="/artists">🎤 Artisti</button>
-      <button class="nav-chip" routerLink="/albums">💿 Album</button>
+  <!-- 🌑 VELO DI SFONDO (Attivo quando cerchi) -->
+  @if (searchBox.value && isDropdownOpen()) {
+    <div class="search-backdrop"></div>
+  }
+
+  <!-- INTESTAZIONE CENTRATA & HERO -->
+  <header class="main-hero">
+    <h1 class="brand-title">Bootleg<span class="dot">.</span></h1>
+    <p class="brand-subtitle">Traccia i tuoi live. Salva i prossimi tour. Condividi i ricordi dal pit.</p>
+    
+    <!-- BARRA DI RICERCA REALE E FUNZIONANTE -->
+    <div class="search-wrapper" #searchWrapper>
+      <div class="search-input-field">
+        <span class="search-icon">🔍</span>
+        <input 
+          #searchBox
+          type="text" 
+          placeholder="Cerca un artista (es. Coldplay, Green Day...)"
+          (input)="search($event)"
+          (focus)="onInputFocus($event)"
+        />
+      </div>
+
+      <!-- TENDINA RIPRISTINATA CON I DATI REALI -->
+      @if (searchBox.value && isDropdownOpen()) {
+        <div class="search-results-overlay">
+          <div class="results-header">
+            <span>Artisti trovati</span>
+          </div>
+          
+          @if (artists$ | async; as artists) {
+            @if (artists.length > 0) {
+              <div class="artists-horizontal-carousel">
+                @for (artist of artists; track artist.name) {
+                  <div class="mini-artist-card" [routerLink]="['/artist', artist.id || artist.name]">
+                    <div class="artist-avatar-box">
+                        <img [src]="artist.imageUrl || 'assets/default-artist.png'" [alt]="artist.name">
+                    </div>
+                    <span class="mini-artist-name">{{ artist.name }}</span>
+                    </div>
+                }
+              </div>
+            } @else {
+              <div class="search-state-info">Nessun artista trovato nei nostri archivi.</div>
+            }
+          } @else {
+            <div class="search-state-info">Ricerca nel pit...</div>
+          }
+        </div>
+      }
     </div>
   </header>
 
-  <!-- 🌟 HERO CARD A TUTTA LARGHEZZA CON IMMAGINE DI SFONDO -->
-  <section class="hero-dashboard-full">
-    <div class="search-hero-card immersive-bg">
-      <div class="hero-overlay-content">
-        <span class="hero-badge">Il tuo diario dei live</span>
-        <h1>Conserva la memoria dei tuoi concerti.</h1>
-        <p>Crea il tuo archivio personale, tieni il conto dei live visti e scopri quando i tuoi artisti preferiti tornano sul palco.</p>
-        
-        <!-- La barra di ricerca reale con il tuo metodo RxJS (input) e il riferimento #searchBox -->
-        <div class="hero-search-bar">
-          <span class="search-icon">🔍</span>
-          <input 
-            #searchBox
-            type="text" 
-            placeholder="Cerca un artista per aggiungerlo ai tuoi live..."
-            (input)="search($event)"
-          />
-        </div>
+  <!-- SEZIONE 2: TOUR REALI (Ripristinati dal tuo Service) -->
+  <main class="showcase-section">
+    <div class="section-title-bar">
+      <div class="indicator-group">
+        <span class="pulse-indicator"></span>
+        <h2>In tour adesso</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- 🚀 SEZIONE DINAMICA: SE L'UTENTE STA SCRIVENDO, MOSTRA I RISULTATI DELLA RICERCA -->
-  <div class="results-viewport-container" *ngIf="searchBox.value">
-    
-    <div class="events-header">
-      <div class="header-title-group">
-        <span class="search-dot"></span>
-        <h3>Risultati della ricerca per "{{ searchBox.value }}"</h3>
-      </div>
+      <span class="swipe-hint">Scorri ➔</span>
     </div>
 
-    <div class="results-container" *ngIf="artists$ | async as artists; else loadingSearch">
-      <!-- Se ci sono artisti, carica il tuo componente custom inserendo la lista -->
-      <app-artist-grid *ngIf="artists.length > 0" [artists]="artists"></app-artist-grid>
-
-      <!-- Stato vuoto della ricerca -->
-      <div class="state-placeholder" *ngIf="artists.length === 0">
-        <p>Nessun artista trovato per "{{ searchBox.value }}"</p>
-      </div>
-    </div>
-
-    <!-- Semplice feedback visivo mentre switchMap lavora -->
-    <ng-template #loadingSearch>
-      <div class="state-placeholder">
-        <p>Ricerca in corso...</p>
-      </div>
-    </ng-template>
-  </div>
-
-  <!-- 🏛️ SEZIONE STATO INIZIALE: SE L'INPUT È VUOTO, MOSTRA I CONCERTI IN ITALIA -->
-  <main class="events-section" *ngIf="!searchBox.value">
-    
-    <div class="events-header">
-      <div class="header-title-group">
-        <span class="live-dot"></span>
-        <h3>Prossimi concerti in Italia</h3>
-      </div>
-      <span class="events-count">{{ concerts().length }} eventi trovati</span>
-    </div>
-
-    <!-- Loading Concerti -->
     @if (isConcertsLoading()) {
-      <div class="state-placeholder">
-        <p>Sincronizzazione con i database live...</p>
+      <div class="loading-shimmer">
+        <p>Recupero date in corso...</p>
       </div>
     }
 
-    <!-- Griglia dei Concerti standard -->
     @if (!isConcertsLoading() && concerts().length > 0) {
-      <div class="gallery-grid">
+      <div class="posters-carousel">
         @for (concert of concerts(); track concert.id) {
-          <article class="concert-poster">
-            <div class="poster-media">
+          <article class="compact-poster-card">
+            <div class="poster-image-box">
               <img [src]="concert.imageUrl" [alt]="concert.name">
-              <span class="badge-city">📍 {{ concert.city }}</span>
+              <span class="poster-location-tag">{{ concert.city }}</span>
             </div>
-            <div class="poster-data">
-              <h4 [title]="concert.name">{{ concert.name }}</h4>
-              <div class="poster-meta-rows">
-                <p class="meta-txt">📅 {{ concert.date }}</p>
-                <p class="meta-txt venue" [title]="concert.venue">🏛️ {{ concert.venue }}</p>
-              </div>
-              <a [href]="concert.ticketUrl" target="_blank" class="btn-action">
-                Biglietti
+            <div class="poster-details">
+              <h3 [title]="concert.name">{{ concert.name }}</h3>
+              <p class="poster-date">📅 {{ concert.date }}</p>
+              <a [href]="concert.ticketUrl" target="_blank" class="poster-link">
+                Info Biglietti
               </a>
             </div>
           </article>
@@ -101,5 +89,25 @@
       </div>
     }
   </main>
+
+  <!-- SEZIONE 3 (IL TERZO ELEMENTO): COME FUNZIONA BOOTLEG -->
+  <!-- Spiega il senso del sito a chi non è loggato, senza usare dati finti -->
+  <section class="features-explainer-grid">
+    <div class="feature-box">
+      <span class="feat-icon">📖</span>
+      <h3>Il tuo diario di transenna</h3>
+      <p>Crea l'archivio storico di tutti i concerti a cui hai partecipato. Non dimenticare mai una data, una lineup o un'emozione.</p>
+    </div>
+    <div class="feature-box">
+      <span class="feat-icon">⭐</span>
+      <h3>Vota l'esperienza</h3>
+      <p>Com'era l'acustica? E l'energia della band? Dai un voto in stelle e scrivi la tua recensione per i posteri.</p>
+    </div>
+    <div class="feature-box">
+      <span class="feat-icon">🎟️</span>
+      <h3>Pianifica il futuro</h3>
+      <p>Salva i tour dei tuoi artisti preferiti nella tua Wishlist personale per ricevere promemoria prima che i biglietti vadano sold-out.</p>
+    </div>
+  </section>
 
 </div>

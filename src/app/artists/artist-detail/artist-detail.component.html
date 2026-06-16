@@ -1,0 +1,115 @@
+<div class="artist-detail-container">
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <span class="pulse-indicator"></span>
+      <p>Esplorando gli archivi del pit...</p>
+    </div>
+  }
+
+  @if (errorMessage()) {
+    <div class="error-state">
+      <p>⚠️ {{ errorMessage() }}</p>
+      <button routerLink="/" class="btn-back">Torna alla Home</button>
+    </div>
+  }
+
+  @if (!isLoading() && artistData(); as data) {
+    <header class="artist-hero-banner">
+      <div class="hero-bg-blur" [style.background-image]="'url(' + data.imageUrl + ')'"></div>
+      
+      <div class="artist-profile-wrapper">
+        <div class="artist-avatar-giant">
+          <img [src]="data.imageUrl || 'assets/default-artist.png'" [alt]="data.name">
+        </div>
+        <div class="artist-meta-info">
+          <span class="category-tag">ARTISTA</span>
+          <h1 class="artist-name-title">{{ data.name }}</h1>
+          <p class="stats-summary">
+            <span>🏟️ Archivio Live Pagina {{ currentPage() }}</span>
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main class="artist-main-content">
+      
+      <div class="search-filter-bar">
+        <div class="input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            #cityInput 
+            type="text" 
+            placeholder="Cerca una città specifica (es. Milano)..." 
+            [value]="cityFilter()"
+            (keyup.enter)="applyFilter(cityInput.value)">
+        </div>
+        <button class="btn-search-action" (click)="applyFilter(cityInput.value)">Filtra</button>
+        
+        @if (cityFilter()) {
+          <button class="btn-clear-filter" (click)="cityInput.value = ''; applyFilter('')">Reset</button>
+        }
+      </div>
+
+      <div class="section-title-row">
+        <h2>
+          @if (cityFilter()) {
+            Concerti a: "{{ cityFilter() }}"
+          } @else {
+            Diario dei Concerti Recenti
+          }
+        </h2>
+      </div>
+
+      @if (data.concerts.length === 0) {
+        <div class="empty-concerts-box">
+          <p class="main-msg">Nessun concerto trovato.</p>
+          <p class="sub-msg">Prova a cambiare filtro o torna indietro nelle pagine dello storico.</p>
+        </div>
+      } @else {
+        <div class="concerts-list">
+          @for (concert of data.concerts; track concert.id) {
+            <article class="concert-item-card">
+              
+              <div class="date-badge">
+                <span class="date-day">{{ concert.date | date:'dd' }}</span>
+                <span class="date-month">{{ concert.date | date:'MMM' | uppercase }}</span>
+                <span class="date-year">{{ concert.date | date:'yyyy' }}</span>
+              </div>
+
+              <div class="concert-info-details">
+                <h3>{{ concert.venue }}</h3>
+                <p class="location-text">📍 <span>{{ concert.city }}</span></p>
+              </div>
+
+              <div class="concert-actions-box">
+                <button class="btn-log-action" (click)="onLogConcert(concert.id)">
+                    Log / Recensisci
+                </button>
+              </div>
+
+            </article>
+          }
+        </div>
+
+        <div class="pagination-container">
+          <button 
+            class="btn-pagination" 
+            [disabled]="currentPage() === 1" 
+            (click)="prevPage()">
+            ◀ Precedenti
+          </button>
+          
+          <span class="current-page-badge">Pagina {{ currentPage() }}</span>
+          
+          <button 
+            class="btn-pagination" 
+            [disabled]="data.concerts.length < 20" 
+            (click)="nextPage()">
+            Successivi ▶
+          </button>
+        </div>
+      }
+    </main>
+  }
+</div>
