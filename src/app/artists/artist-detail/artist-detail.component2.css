@@ -1,32 +1,31 @@
 /* ==========================================================================
-   1. STRUTTURA GENERALE & CONTENITORE COMPONENTE
+   1. STRUTTURA GENERALE & BACKGROUND (Palette Morbida Letterboxd)
    ========================================================================== */
 
 .artist-detail-container {
-  background-color: #0f0f11; /* Grigio asfalto scurissimo, stile underground */
-  color: #f4f4f6;
+  background-color: #14181c; /* L'antracite morbido di Letterboxd */
+  color: #9ab; /* Grigio-azzurro desaturato, molto riposante */
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   padding-bottom: 80px;
 }
 
 /* ==========================================================================
-   2. HERO BANNER (Profilo Artista - COMPATTO & ANTI-PIXEL)
+   2. HERO BANNER (Struttura precedente + Colori Letterboxd)
    ========================================================================== */
 
 .artist-hero-banner {
   position: relative;
   overflow: hidden;
-  /* Ridotto il padding verticale da 140px/60px a 90px/30px per compattare */
   padding: 90px 8% 30px 8%; 
   display: flex;
   align-items: flex-end;
-  background-color: #0f0f11; 
-  border-bottom: 2px solid #1a1a1f;
-  min-height: 220px; /* Abbassato drasticamente da 380px per far salire i contenuti */
+  background-color: #1c252d; 
+  border-bottom: 2px solid #24303c;
+  min-height: 220px;
 }
 
-/* Sfondo bilanciato: elimina i quadratoni dei pixel ma lascia l'immagine chiara */
+/* Sfondo bilanciato: mantiene i colori originali sfocandoli a 15px */
 .hero-bg-blur {
   position: absolute;
   top: 0; 
@@ -35,14 +34,14 @@
   height: 100%;
   background-size: cover;
   background-position: center 20%;
-  opacity: 0.45; 
-  filter: grayscale(100%) blur(15px);
+  opacity: 0.35; 
+  filter: blur(15px); /* Sfocatura morbida ma colorata, non in bianco e nero */
   z-index: 1;
   pointer-events: none;
   transform: scale(1.05); 
 }
 
-/* Velo nero protettivo: più stretto per adattarsi alla nuova altezza fissa */
+/* Velo scuro per la leggibilità */
 .artist-hero-banner::after {
   content: "";
   position: absolute;
@@ -50,41 +49,41 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(15, 15, 17, 0) 30%, rgba(15, 15, 17, 0.9) 100%);
+  background: linear-gradient(to bottom, rgba(20, 24, 28, 0.2) 30%, #14181c 100%);
   z-index: 2; 
   pointer-events: none;
 }
 
-/* Contenuto principale del profilo (Testi + Avatar) */
+/* Contenuto del profilo */
 .artist-profile-wrapper {
   position: relative;
   z-index: 3; 
   display: flex;
-  gap: 25px; /* Ridotto leggermente lo spazio tra foto e testi */
+  gap: 25px; 
   align-items: center;
   width: 100%;
 }
 
-/* Avatar proporzionato e compatto */
+/* Avatar squadrato ma curato */
 .artist-avatar-giant img {
-  width: 110px; /* Ridotto da 150px per risparmiare spazio verticale */
+  width: 110px; 
   height: 110px;
   border-radius: 4px; 
   object-fit: cover;
-  border: 1px solid #2e2e38;
-  box-shadow: 6px 6px 0px #1a1a1f; 
+  border: 1px solid #2c3440;
+  box-shadow: 6px 6px 0px #14181c; 
 }
 
 .category-tag {
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #ccff00; 
+  color: #00c030; /* Il verde iconico di Letterboxd al posto del giallo acido */
   font-family: monospace;
 }
 
 .artist-name-title {
-  font-size: 2.8rem; /* Ridotto da 4rem: più agile, non occupa tutta la schermata */
+  font-size: 2.8rem; 
   margin: 4px 0;
   font-weight: 900;
   text-transform: uppercase; 
@@ -94,29 +93,29 @@
 }
 
 .stats-summary {
-  color: #8a8a98;
+  color: #89a;
   font-size: 0.8rem;
   font-family: monospace;
 }
 
 /* ==========================================================================
-   3. FILTRI DI RICERCA (Search Bar Monoblocco)
+   3. FILTRI DI RICERCA (Struttura Monoblocco Precedente)
    ========================================================================== */
 
 .artist-main-content {
   max-width: 1100px;
-  margin: 30px auto 0 auto; /* Ridotto il margine superiore da 50px a 30px */
+  margin: 30px auto 0 auto; 
   padding: 0 24px;
 }
 
 .search-filter-bar {
   display: flex;
-  gap: 0; 
-  margin-bottom: 30px; /* Ridotto da 40px */
+  gap: 0; /* Torna il blocco geometrico unico */
+  margin-bottom: 30px; 
   align-items: center;
-  background: #141418;
-  padding: 4px; /* Più snella */
-  border: 1px solid #2e2e38;
+  background: #1c252d; /* Colore Letterboxd */
+  padding: 4px; 
+  border: 1px solid #2c3440;
   border-radius: 0px; 
 }
 
@@ -130,14 +129,14 @@
 .search-icon {
   position: absolute;
   left: 15px;
-  color: #626272;
+  color: #678;
 }
 
 .search-filter-bar input {
   width: 100%;
   background: transparent;
   border: none;
-  padding: 12px 12px 12px 45px; /* Più compatto */
+  padding: 12px 12px 12px 45px; 
   border-radius: 0;
   color: #fff;
   font-size: 0.95rem;
@@ -147,9 +146,10 @@
   outline: none;
 }
 
+/* Bottone Cerca Monoblocco Verde Letterboxd */
 .btn-search-action {
-  background: #ccff00;
-  color: #0f0f11;
+  background: #00b020; 
+  color: #ffffff;
   border: none;
   padding: 0 25px;
   align-self: stretch; 
@@ -162,12 +162,12 @@
 }
 
 .btn-search-action:hover {
-  background: #ddff33;
+  background: #00c030;
 }
 
 .btn-clear-filter {
-  background: #24242b;
-  color: #f4f4f6;
+  background: #2c3440;
+  color: #9ab;
   border: none;
   padding: 0 15px;
   align-self: stretch;
@@ -177,7 +177,7 @@
 
 .section-title-row {
   margin-bottom: 20px;
-  border-bottom: 2px solid #1a1a1f;
+  border-bottom: 2px solid #24303c;
   padding-bottom: 8px;
 }
 
@@ -189,28 +189,28 @@
 }
 
 /* ==========================================================================
-   4. LISTA DEI CONCERTI (Design Ticket Stub / Biglietto Strappabile)
+   4. LISTA DEI CONCERTI (Ticket Geometrico + Dettagli Soft)
    ========================================================================== */
 
 .concerts-list {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Ridotto lo spazio tra un concerto e l'altro */
+  gap: 12px; 
 }
 
 .concert-item-card {
-  background: #141418;
-  border: 1px solid #2e2e38;
-  border-radius: 0px; 
+  background: #1c252d; 
+  border: 1px solid #2c3440;
+  border-radius: 0px; /* Torna il taglio netto geometrico */
   padding: 0; 
   display: flex;
   align-items: stretch; 
-  transition: border-color 0.2s ease, transform 0.1s ease;
+  transition: border-color 0.2s ease, background-color 0.15s ease;
 }
 
 .concert-item-card:hover {
-  border-color: #ccff00;
-  transform: translateY(-2px);
+  border-color: #00c030;
+  background-color: #202b35;
 }
 
 /* Matrice sinistra (Data) con taglio tratteggiato verticale */
@@ -219,11 +219,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #1a1a21;
-  padding: 12px 15px; /* Più compatto */
+  background: rgba(20, 24, 28, 0.4);
+  padding: 12px 15px; 
   min-width: 80px;
   text-align: center;
-  border-right: 2px dashed #2e2e38; 
+  border-right: 2px dashed #24303c; /* Ritorna lo strappo netto del biglietto */
   font-family: monospace;
 }
 
@@ -235,20 +235,21 @@
 }
 .date-month { 
   font-size: 0.75rem; 
-  color: #ccff00; 
+  color: #ff8000; /* L'arancione raffinato di Letterboxd per dare un accento caldo */
   font-weight: 700; 
   margin: 2px 0; 
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .date-year { 
   font-size: 0.7rem; 
-  color: #626272; 
+  color: #678; 
 }
 
-/* Corpo centrale del biglietto (Informazioni) */
+/* Corpo centrale del biglietto */
 .concert-info-details {
   flex-grow: 1;
-  padding: 15px 25px; /* Ridotto il padding interno del ticket */
+  padding: 15px 25px; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -256,15 +257,16 @@
 
 .concert-info-details h3 { 
   margin: 0 0 4px 0; 
-  font-size: 1.2rem; /* Leggermente più piccolo per salvaguardare spazio */
+  font-size: 1.2rem; 
   font-weight: 800;
   letter-spacing: -0.5px;
   text-transform: uppercase;
+  color: #ffffff;
 }
 
 .location-text { 
   margin: 0; 
-  color: #8a8a98; 
+  color: #9ab; 
   font-size: 0.8rem; 
   font-family: monospace;
 }
@@ -273,19 +275,19 @@
   font-weight: bold;
 }
 
-/* Blocco d'azione destro del biglietto (Pulsante Log) */
+/* Blocco d'azione destro (Ritorna il pulsante con bordo) */
 .concert-actions-box {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  background: rgba(26, 26, 33, 0.3);
-  border-left: 1px solid #1a1a1f;
+  background: rgba(20, 24, 28, 0.2);
+  border-left: 1px solid #24303c;
 }
 
 .btn-log-action {
   background: transparent;
   color: #ffffff;
-  border: 2px solid #ffffff;
+  border: 2px solid #ffffff; /* Torna il bordo del look precedente */
   padding: 8px 18px;
   border-radius: 0px; 
   font-weight: 800;
@@ -298,7 +300,7 @@
 
 .btn-log-action:hover {
   background: #ffffff;
-  color: #0f0f11;
+  color: #14181c;
 }
 
 /* ==========================================================================
@@ -311,13 +313,13 @@
   align-items: center;
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 2px solid #1a1a1f;
+  border-top: 2px solid #24303c;
 }
 
 .btn-pagination {
-  background: #141418;
+  background: #1c252d;
   color: #ffffff;
-  border: 1px solid #2e2e38;
+  border: 1px solid #2c3440;
   padding: 10px 20px;
   border-radius: 0px;
   font-weight: 700;
@@ -331,8 +333,8 @@
 
 .btn-pagination:hover:not(:disabled) {
   background: transparent;
-  border-color: #ccff00;
-  color: #ccff00;
+  border-color: #00c030;
+  color: #00c030;
 }
 
 .btn-pagination:disabled {
@@ -343,7 +345,7 @@
 .current-page-badge {
   font-family: monospace;
   font-weight: bold;
-  color: #8a8a98;
+  color: #678;
   font-size: 0.8rem;
 }
 
@@ -351,9 +353,9 @@
 .loading-state, .error-state, .empty-concerts-box {
   text-align: center;
   padding: 60px 20px;
-  background: #141418;
-  border: 1px dashed #2e2e38;
-  color: #8a8a98;
+  background: #1c252d;
+  border: 1px dashed #2c3440;
+  color: #9ab;
 }
 
 .empty-concerts-box .main-msg { 
@@ -362,8 +364,3 @@
   font-weight: 800; 
   text-transform: uppercase; 
 }
-
-
-
-
-
