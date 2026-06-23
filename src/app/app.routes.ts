@@ -6,8 +6,8 @@
 import { Routes } from '@angular/router';
 import { SongsComponent } from './songs/songs';
 import { AlbumsComponent } from './albums/albums';
-import { AlbumDetailComponent } from './albums/albumDetail';
-import { ArtistSearchComponent } from './artists/artistSearch.component';
+import { AlbumDetailComponent } from './albums/album-detail.component';
+import { ArtistSearchComponent } from './artists/artist-search.component';
 
 // placeholder 
 import { Component } from '@angular/core';
@@ -17,7 +17,7 @@ import { LoginComponent } from './login/login';
 import { RegisterComponent } from './register/register.component';
 
 import { authGuard } from './guards/auth.guard';
-import { ArtistDetailComponent } from './artists/artist-detail/artist.detail.component';
+import { ArtistDetailComponent } from './artists/artist-detail/artist-detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },            // TODO : da rimuovere (prova)

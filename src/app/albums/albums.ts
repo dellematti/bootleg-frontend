@@ -13,7 +13,7 @@ imports: [CommonModule, RouterLink]
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './albums.html',
-  styleUrl: './albums.css',
+  styleUrls: ['./albums.css'],
 })
 export class AlbumsComponent {
 

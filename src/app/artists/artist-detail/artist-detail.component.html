@@ -23,10 +23,10 @@
           <img [src]="data.imageUrl || 'assets/default-artist.png'" [alt]="data.name">
         </div>
         <div class="artist-meta-info">
-          <span class="category-tag">ARTISTA</span>
+          <span class="category-tag">ARCHIVIO VIRTUAL TICKET</span>
           <h1 class="artist-name-title">{{ data.name }}</h1>
           <p class="stats-summary">
-            <span>🏟️ Archivio Live Pagina {{ currentPage() }}</span>
+            <span>🏟️ DATABASE LIVE HISTORIC • PAGINA {{ currentPage() }}</span>
           </p>
         </div>
       </div>
@@ -69,23 +69,51 @@
       } @else {
         <div class="concerts-list">
           @for (concert of data.concerts; track concert.id) {
-            <article class="concert-item-card">
+            <article class="real-ticket-card">
               
-              <div class="date-badge">
-                <span class="date-day">{{ concert.date | date:'dd' }}</span>
-                <span class="date-month">{{ concert.date | date:'MMM' | uppercase }}</span>
-                <span class="date-year">{{ concert.date | date:'yyyy' }}</span>
+              <div class="tkt-side-matrix">
+                <span class="matrix-text">N° {{ concert.id || '0028' }} • {{ concert.date | date:'ddMMyy' }}</span>
               </div>
 
-              <div class="concert-info-details">
-                <h3>{{ concert.venue }}</h3>
-                <p class="location-text">📍 <span>{{ concert.city }}</span></p>
+              <div class="tkt-main-plate">
+                
+                <div class="tkt-event-info">
+                  <h3 class="tkt-city-name">{{ concert.city }}</h3>
+                  <p class="tkt-venue">{{ concert.venue }}</p>
+                </div>
+                
+                <div class="tkt-matrix-grid">
+                  <div class="grid-box">
+                    <span class="box-label">DATA / DATE</span>
+                    <span class="box-value">{{ concert.date | date:'dd MMM yyyy' | uppercase }}</span>
+                  </div>
+                  
+                </div>
+
+                <div class="tkt-barcode-horiz-wrapper">
+                  <div class="real-css-barcode-h"></div>
+                </div>
               </div>
 
-              <div class="concert-actions-box">
-                <button class="btn-log-action" (click)="onLogConcert(concert.id)">
-                    Log / Recensisci
-                </button>
+              <div class="tkt-tear-strip">
+                <div class="tear-notch top"></div>
+                <div class="tear-line-dashed"></div>
+                <div class="tear-notch bottom"></div>
+              </div>
+
+              <div class="tkt-right-stub">
+                <div class="stub-meta-top">
+                  <span>TKT-{{ concert.id || '00' }}</span>
+                  <span>{{ concert.date | date:'dd/MM/yy' }}</span>
+                </div>
+                
+                <div class="stub-action-center">
+                  <button class="btn-ticket-log" (click)="onLogConcert(concert.id)">
+                    LOG / RECENSISCI
+                  </button>
+                </div>
+
+                <div class="real-css-barcode-v"></div>
               </div>
 
             </article>

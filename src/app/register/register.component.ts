@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
+import { RegisterRequest } from '../models/register-request';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterComponent {
 
-  request = {
+  request: RegisterRequest = {
     username: '',
     password: ''
   };

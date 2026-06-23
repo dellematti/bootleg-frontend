@@ -1,25 +1,16 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { LoginRequest } from '../models/login-request';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-
-import { Router } from '@angular/router';
-
-import { ActivatedRoute } from '@angular/router';
-
-// opzionale ma consigliato: usare un model
-interface LoginRequest {
-  username: string;
-  password: string;
-}
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrls: ['./login.css'],
 })
 export class LoginComponent {
 

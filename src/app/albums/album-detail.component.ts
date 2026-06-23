@@ -10,8 +10,8 @@ import { Album } from '../models/album';
 @Component({
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './albumDetail.html',
-  styleUrl: './albumDetail.css'
+  templateUrl: './album-detail.component.html',
+  styleUrls: ['./album-detail.component.css']
 })
 export class AlbumDetailComponent {
 

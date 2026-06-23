@@ -12,18 +12,19 @@ import {
   shareReplay
 } from 'rxjs';
 import { LoginRequest } from '../models/login-request';
+import { RegisterRequest } from '../models/register-request';
 import { FORWARD_BROWSER_COOKIES } from '../interceptors/ssr-cookie.interceptor';
 
 
 type AuthUser = any | null;
-type AuthState = any | null | undefined;
+type AuthState = AuthUser | undefined;
 
 
 
 interface AuthVm {
   initialized: boolean;
   loggedIn: boolean;
-  user: any | null;
+  user: AuthUser;
 }
 
 @Injectable({
@@ -68,7 +69,7 @@ export class AuthService {
   }
 
 
-  register(request: any): Observable<any> {
+  register(request: RegisterRequest): Observable<any> {
     return this.getCsrfToken().pipe(
       switchMap(() =>
         this.http.post(`${this.baseUrl}/register`, request, {
@@ -79,8 +80,8 @@ export class AuthService {
   }
 
 
-  getUser(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/me`, {
+  getUser(): Observable<AuthUser> {
+    return this.http.get<AuthUser>(`${this.baseUrl}/me`, {
       withCredentials: true,
       context: new HttpContext().set(FORWARD_BROWSER_COOKIES, true)
     });

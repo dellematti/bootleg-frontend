@@ -9,7 +9,7 @@ import { ArtistPageData } from '../../models/artist-page';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './artist-detail.component.html',
-  styleUrl: './artist-detail.component.css'
+  styleUrls: ['./artist-detail.component.css']
 })
 export class ArtistDetailComponent implements OnInit {
 
@@ -17,7 +17,7 @@ export class ArtistDetailComponent implements OnInit {
   isLoading = signal<boolean>(true);
   errorMessage = signal<string | null>(null);
 
-  // Nuovi Signals per monitorare la paginazione e i filtri
+  // 🌟 Nuovi Signals per monitorare la paginazione e i filtri
   currentPage = signal<number>(1);
   cityFilter = signal<string>('');
   artistId: string = '';

@@ -84,7 +84,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './songs.html',
-  styleUrl: './songs.css',
+  styleUrls: ['./songs.css'],
 })
 export class SongsComponent {
 

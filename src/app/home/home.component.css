@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-/* ========================================================= */
-/* 🖤 FONDAMENTA & LAYOUT (STILE CINEMATIC MINIMAL)          */
-/* ========================================================= */
+/* ==========================================================================
+   1. STRUTTURA GENERALE & LAYOUT UNDERGROUND
+   ========================================================================== */
 .bootleg-container {
-  font-family: 'Inter', sans-serif;
-  background-color: #14181c; /* Sfondo ardesia opaco tipico di Letterboxd */
-  color: #9aabbc; /* Testo secondario morbido a basso contrasto */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0f0f11; /* Grigio asfalto scurissimo */
+  color: #f4f4f6; /* Testo chiaro ad alto contrasto */
   min-height: 100vh;
   padding: 100px 24px;
   box-sizing: border-box;
@@ -18,23 +18,23 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* 🌑 BACKDROP SATINATO (Sfocatura profonda ed elegante durante la ricerca) */
+/* 🌑 BACKDROP SATINATO (Modificato per fondersi con il nuovo sfondo scuro) */
 .search-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(20, 24, 28, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15, 15, 17, 0.75);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   z-index: 98;
   animation: fadeIn 0.25s ease-out;
 }
 
-/* ========================================================= */
-/* ✍️ HERO & BRANDING (Focus sulla tipografia)               */
-/* ========================================================= */
+/* ==========================================================================
+   2. HERO & BRANDING (Impatto Tipografico & Accento Neon)
+   ========================================================================== */
 .main-hero {
   text-align: center;
   max-width: 640px;
@@ -47,47 +47,62 @@
 }
 
 .brand-title { 
-  font-size: 3.2rem; 
-  font-weight: 800; 
-  letter-spacing: -0.05em; 
+  font-size: 3.5rem; 
+  font-weight: 900; 
+  letter-spacing: -1px; 
   margin: 0 0 12px 0; 
-  color: #ffffff; /* Titolo in bianco cristallino */
-  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 0.95;
 }
-/* Micro-accento arancione caldo cinematico */
-.brand-title .dot { color: #ff8000; } 
+
+/* Il pallino diventa giallo/neon lime stile cyber/underground */
+.brand-title .dot { 
+  color: #ccff00; 
+} 
 
 .brand-subtitle { 
-  font-size: 1.05rem; 
-  color: #9aabbc; 
-  margin: 0 0 36px 0; 
+  font-size: 0.85rem; 
+  color: #8a8a98; 
+  margin: 10px 0 36px 0; 
   line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* ========================================================= */
-/* 🔍 BARRA DI RICERCA (Trasparente, geometrica, pulita)     */
-/* ========================================================= */
-.search-wrapper { position: relative; width: 100%; }
+/* ==========================================================================
+   3. BARRA DI RICERCA (Monoblocco geometrico a spigoli vivi)
+   ========================================================================== */
+.search-wrapper { 
+  position: relative; 
+  width: 100%; 
+}
 
 .search-input-field {
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(28, 37, 45, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Bordo millimetrico */
-  border-radius: 6px; /* Angoli netti e professionali */
+  background: #141418; /* Uniformato alle card e searchbar del dettaglio */
+  border: 1px solid #2e2e38; 
+  border-radius: 0px; /* Rimosse le curvature */
   padding: 16px 20px;
   width: 100%;
   box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
+  transition: border-color 0.15s ease;
 }
+
 .search-input-field:focus-within {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: #1c252d;
+  border-color: #ccff00; /* Il bordo si accende di giallo neon al focus */
+  background: #141418;
 }
-.search-icon { font-size: 1rem; opacity: 0.4; color: #9aabbc; }
+
+.search-icon { 
+  font-size: 1rem; 
+  color: #626272; 
+}
+
 .search-input-field input {
   flex: 1;
   background: transparent;
@@ -97,32 +112,37 @@
   font-family: inherit;
   outline: none;
 }
-.search-input-field input::placeholder { color: #667788; }
 
-/* ========================================================= */
-/* 🎴 TENDINA RISULTATI ARTISTI                              */
-/* ========================================================= */
+.search-input-field input::placeholder { 
+  color: #626272; 
+}
+
+/* ==========================================================================
+   4. TENDINA RISULTATI (Stile Industrial con Box-Shadow Netta)
+   ========================================================================== */
 .search-results-overlay {
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
   right: 0;
-  background: #1c252d;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  background: #141418;
+  border: 1px solid #2e2e38;
+  border-radius: 0px; /* Rimosse le curvature */
+  box-shadow: 6px 6px 0px #1a1a1f; /* Shadow geometrico e netto uguale all'avatar */
   overflow: hidden;
   text-align: left;
+  z-index: 100;
 }
 
 .results-header {
   padding: 12px 20px;
   font-size: 0.7rem;
-  font-weight: 600;
-  color: #667788;
+  font-weight: 700;
+  color: #ccff00; /* Header sezione della tendina in evidenza */
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  letter-spacing: 2px;
+  font-family: monospace;
+  border-bottom: 2px solid #1a1a1f;
 }
 
 .artists-horizontal-carousel {
@@ -131,12 +151,19 @@
   gap: 20px;
   padding: 20px;
   overflow-x: auto;
+  background: #111115;
 }
-.artists-horizontal-carousel::-webkit-scrollbar { height: 3px; }
-.artists-horizontal-carousel::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+
+.artists-horizontal-carousel::-webkit-scrollbar { 
+  height: 4px; 
+}
+
+.artists-horizontal-carousel::-webkit-scrollbar-thumb { 
+  background: #2e2e38; 
+}
 
 .mini-artist-card {
-  flex: 0 0 90px;
+  flex: 0 0 95px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -144,70 +171,108 @@
   cursor: pointer;
 }
 
+/* L'avatar diventa squadrato come i biglietti e la foto profilo grande */
 .artist-avatar-box {
   width: 76px; 
   height: 76px;
-  border-radius: 50%;
+  border-radius: 4px; /* Cambiato da 50% (cerchio) a 4px (quadrato ruvido) */
   overflow: hidden;
-  background: #14181c;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1a1a21;
+  border: 1px solid #2e2e38;
   margin-bottom: 10px;
-  transition: all 0.15s ease-out;
+  transition: all 0.15s ease;
 }
+
 .mini-artist-card:hover .artist-avatar-box {
-  transform: scale(1.05);
-  border-color: #ff8000; /* L'accento arancione si attiva sull'hover dell'artista */
+  transform: translateY(-2px);
+  border-color: #ccff00;
+  box-shadow: 4px 4px 0px #1a1a1f;
 }
-.artist-avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.artist-avatar-box img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
 
 .mini-artist-name {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #9aabbc;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8a8a98;
+  font-family: monospace;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-transform: uppercase;
 }
-.mini-artist-card:hover .mini-artist-name { color: #ffffff; }
-.search-state-info { padding: 32px 20px; text-align: center; color: #667788; font-size: 0.9rem; }
 
-/* ========================================================= */
-/* 🎟️ CAROSELLO CONCERTI (Widescreen Cinematografico 16:10)   */
-/* ========================================================= */
+.mini-artist-card:hover .mini-artist-name { 
+  color: #ffffff; 
+}
+
+.search-state-info { 
+  padding: 32px 20px; 
+  text-align: center; 
+  color: #8a8a98; 
+  font-size: 0.85rem; 
+  font-family: monospace;
+}
+
+/* ==========================================================================
+   5. VETRINA CONCERTI (Formato Poster Squadrato & Tag Giallo-Neon)
+   ========================================================================== */
 .showcase-section { 
-  max-width: 980px; 
+  max-width: 1100px; /* Allineato alla larghezza del main content dell'artista */
   width: 100%; 
   display: flex; 
   flex-direction: column; 
-  gap: 16px; 
+  gap: 20px; 
   z-index: 10; 
 }
+
 .section-title-bar { 
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 10px;
+  border-bottom: 2px solid #1a1a1f; /* Riga spessa e scura */
+  padding-bottom: 8px;
 }
-.indicator-group { display: flex; align-items: center; gap: 8px; }
-.pulse-indicator { display: none; } /* Rimosso per pulizia estetica */
 
 .section-title-bar h2 { 
-  font-size: 1.05rem; 
-  font-weight: 600; 
+  font-size: 1.2rem; 
+  font-weight: 800; 
   color: #ffffff; 
   margin: 0; 
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 1px;
 }
-.swipe-hint { font-size: 0.75rem; color: #556677; font-weight: 500; }
 
-.posters-carousel { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px; }
-.posters-carousel::-webkit-scrollbar { display: none; }
+.swipe-hint { 
+  font-size: 0.7rem; 
+  color: #626272; 
+  font-weight: 700; 
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.posters-carousel { 
+  display: flex; 
+  gap: 16px; 
+  overflow-x: auto; 
+  padding-bottom: 15px; 
+}
+
+.posters-carousel::-webkit-scrollbar {
+  height: 4px;
+}
+.posters-carousel::-webkit-scrollbar-thumb {
+  background: #2e2e38;
+}
 
 .compact-poster-card { 
-  flex: 0 0 260px; /* Larghezza aumentata per ospitare il formato panoramico */
+  flex: 0 0 260px; 
   width: 260px; 
   display: flex; 
   flex-direction: column;
@@ -216,73 +281,106 @@
 .poster-image-box { 
   position: relative; 
   width: 100%; 
-  aspect-ratio: 16 / 10; /* Risolve il problema del ritaglio: si adatta nativamente ai banner musicali */
-  border-radius: 6px; 
+  aspect-ratio: 16 / 10; 
+  border-radius: 0px; /* Angoli netti industrial */
   overflow: hidden; 
-  background: #1c252d; 
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: border-color 0.15s ease-in-out;
+  background: #141418; 
+  border: 1px solid #2e2e38;
+  transition: all 0.15s ease;
 }
+
 .compact-poster-card:hover .poster-image-box {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: #ccff00;
+  transform: translateY(-2px);
 }
+
 .poster-image-box img { 
   width: 100%; 
   height: 100%; 
   object-fit: cover; 
-  object-position: center; 
 }
 
+/* Il tag della location riprende lo stile industrial/ticket */
 .poster-location-tag { 
   position: absolute; 
-  bottom: 8px; 
-  left: 8px; 
-  background: rgba(20, 24, 28, 0.85); 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 3px 8px; 
-  border-radius: 4px; 
+  bottom: 0; 
+  left: 0; 
+  background: #1a1a21; 
+  padding: 4px 8px; 
+  border-radius: 0px; 
   font-size: 0.65rem; 
-  font-weight: 600; 
-  color: #ffffff; 
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  letter-spacing: 0.02em;
+  font-weight: 700; 
+  color: #ccff00; /* Testo neon */
+  border-top: 1px solid #2e2e38;
+  border-right: 1px solid #2e2e38;
+  letter-spacing: 1px;
+  font-family: monospace;
+  text-transform: uppercase;
 }
 
-.poster-details { padding-top: 12px; display: flex; flex-direction: column; gap: 3px; }
+.poster-details { 
+  padding-top: 12px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
+}
+
 .poster-details h3 { 
-  font-size: 0.88rem; 
-  font-weight: 600; 
+  font-size: 1.05rem; 
+  font-weight: 800; 
   color: #ffffff; 
   margin: 0; 
-  line-height: 1.3; 
+  line-height: 1.2; 
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
   white-space: nowrap;
   overflow: hidden; 
   text-overflow: ellipsis; 
 }
-.poster-date { margin: 0; font-size: 0.75rem; color: #667788; }
+
+.poster-date { 
+  margin: 0; 
+  font-size: 0.75rem; 
+  color: #8a8a98; 
+  font-family: monospace;
+}
+
 .poster-link { 
-  font-size: 0.72rem; 
-  font-weight: 600; 
-  color: #ff8000; /* Link arancione raffinato ed elegante */
+  font-size: 0.75rem; 
+  font-weight: 800; 
+  color: #ffffff; 
   text-decoration: none; 
   margin-top: 4px;
+  text-transform: uppercase;
+  font-family: monospace;
+  letter-spacing: 1px;
+  border: 1px solid #2e2e38;
+  background: #141418;
+  padding: 6px 12px;
+  text-align: center;
+  transition: all 0.1s ease;
 }
-.poster-link:hover { text-decoration: underline; }
 
-/* ========================================================= */
-/* 📖 EXPLAINER GRID (Aria e minimalismo, senza scatolotti)  */
-/* ========================================================= */
+.compact-poster-card:hover .poster-link { 
+  background: #ffffff;
+  color: #0f0f11;
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   6. EXPLAINER GRID (Sezione Caratteristiche / Footer-info)
+   ========================================================================== */
 .features-explainer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 48px;
-  max-width: 980px;
+  max-width: 1100px;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 2px solid #1a1a1f;
   padding-top: 50px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
+
 .feature-box { 
   display: flex; 
   flex-direction: column; 
@@ -292,16 +390,41 @@
   border-radius: 0;
   border: none;
 }
-.feat-icon { font-size: 1.3rem; opacity: 0.8; }
-.feature-box h3 { font-size: 0.95rem; font-weight: 600; color: #ffffff; margin: 0; letter-spacing: -0.01em;}
-.feature-box p { font-size: 0.85rem; color: #8899aa; margin: 0; line-height: 1.5; }
 
-/* SHIMMER LOADING PLACEHOLDER */
+/* Icone color neon ad alto impatto */
+.feat-icon { 
+  font-size: 1.3rem; 
+  color: #ccff00; 
+}
+
+.feature-box h3 { 
+  font-size: 1rem; 
+  font-weight: 800; 
+  color: #ffffff; 
+  margin: 0; 
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.feature-box p { 
+  font-size: 0.85rem; 
+  color: #8a8a98; 
+  margin: 0; 
+  line-height: 1.6; 
+}
+
+/* ==========================================================================
+   7. STATI AUSILIARI DI LOADING
+   ========================================================================== */
 .loading-shimmer {
   padding: 40px;
   text-align: center;
-  color: #667788;
-  font-size: 0.9rem;
+  color: #8a8a98;
+  font-size: 0.85rem;
+  font-family: monospace;
+  background: #141418;
+  border: 1px dashed #2e2e38;
+  text-transform: uppercase;
 }
 
 @keyframes fadeIn {

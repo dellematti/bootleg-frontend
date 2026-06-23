@@ -1,123 +1,105 @@
 /* ==========================================================================
-   1. STRUTTURA GENERALE & CONTENITORE COMPONENTE
+   1. STRUTTURA GENERALE
    ========================================================================== */
 
 .artist-detail-container {
-  background-color: #0f0f11; /* Grigio asfalto scurissimo, stile underground */
-  color: #f4f4f6;
+  background-color: #111113; 
+  color: #d1d1d6; 
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   padding-bottom: 80px;
 }
 
 /* ==========================================================================
-   2. HERO BANNER (Profilo Artista - COMPATTO & ANTI-PIXEL)
+   2. HERO BANNER
    ========================================================================== */
 
 .artist-hero-banner {
   position: relative;
   overflow: hidden;
-  /* Ridotto il padding verticale da 140px/60px a 90px/30px per compattare */
-  padding: 90px 8% 30px 8%; 
+  padding: 80px 8% 30px 8%; 
   display: flex;
   align-items: flex-end;
-  background-color: #0f0f11; 
-  border-bottom: 2px solid #1a1a1f;
-  min-height: 220px; /* Abbassato drasticamente da 380px per far salire i contenuti */
+  background-color: #111113; 
+  border-bottom: 1px solid #1f1f24;
+  min-height: 180px;
 }
 
-/* Sfondo bilanciato: elimina i quadratoni dei pixel ma lascia l'immagine chiara */
 .hero-bg-blur {
   position: absolute;
-  top: 0; 
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background-size: cover;
   background-position: center 20%;
-  opacity: 0.45; 
-  filter: grayscale(100%) blur(15px);
+  opacity: 0.2; 
+  filter: grayscale(100%) blur(25px);
   z-index: 1;
   pointer-events: none;
-  transform: scale(1.05); 
 }
 
-/* Velo nero protettivo: più stretto per adattarsi alla nuova altezza fissa */
 .artist-hero-banner::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(15, 15, 17, 0) 30%, rgba(15, 15, 17, 0.9) 100%);
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(17, 17, 19, 0) 40%, rgba(17, 17, 19, 1) 100%);
   z-index: 2; 
-  pointer-events: none;
 }
 
-/* Contenuto principale del profilo (Testi + Avatar) */
 .artist-profile-wrapper {
   position: relative;
   z-index: 3; 
   display: flex;
-  gap: 25px; /* Ridotto leggermente lo spazio tra foto e testi */
+  gap: 25px;
   align-items: center;
-  width: 100%;
 }
 
-/* Avatar proporzionato e compatto */
 .artist-avatar-giant img {
-  width: 110px; /* Ridotto da 150px per risparmiare spazio verticale */
-  height: 110px;
-  border-radius: 4px; 
+  width: 90px; 
+  height: 90px;
+  border-radius: 4px;
   object-fit: cover;
-  border: 1px solid #2e2e38;
-  box-shadow: 6px 6px 0px #1a1a1f; 
+  border: 1px solid #24242c;
 }
 
 .category-tag {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #ccff00; 
+  color: #cbd63c;
   font-family: monospace;
 }
 
 .artist-name-title {
-  font-size: 2.8rem; /* Ridotto da 4rem: più agile, non occupa tutta la schermata */
-  margin: 4px 0;
-  font-weight: 900;
+  font-size: 2.3rem; 
+  margin: 2px 0;
+  font-weight: 800;
   text-transform: uppercase; 
-  letter-spacing: -1px;
-  line-height: 0.95;
+  letter-spacing: -0.5px;
   color: #ffffff;
 }
 
 .stats-summary {
-  color: #8a8a98;
-  font-size: 0.8rem;
+  color: #6e6e7e;
+  font-size: 0.7rem;
   font-family: monospace;
 }
 
 /* ==========================================================================
-   3. FILTRI DI RICERCA (Search Bar Monoblocco)
+   3. FILTRI DI RICERCA
    ========================================================================== */
 
 .artist-main-content {
-  max-width: 1100px;
-  margin: 30px auto 0 auto; /* Ridotto il margine superiore da 50px a 30px */
-  padding: 0 24px;
+  max-width: 1000px;
+  margin: 30px auto 0 auto;
+  padding: 0 20px;
 }
 
 .search-filter-bar {
   display: flex;
-  gap: 0; 
-  margin-bottom: 30px; /* Ridotto da 40px */
-  align-items: center;
-  background: #141418;
-  padding: 4px; /* Più snella */
-  border: 1px solid #2e2e38;
-  border-radius: 0px; 
+  background: #17171c;
+  padding: 4px;
+  border: 1px solid #24242c;
+  border-radius: 4px; 
+  margin-bottom: 30px;
 }
 
 .input-wrapper {
@@ -127,182 +109,300 @@
   align-items: center;
 }
 
-.search-icon {
-  position: absolute;
-  left: 15px;
-  color: #626272;
-}
+.search-icon { position: absolute; left: 15px; color: #4e4e5e; }
 
 .search-filter-bar input {
   width: 100%;
   background: transparent;
   border: none;
-  padding: 12px 12px 12px 45px; /* Più compatto */
-  border-radius: 0;
+  padding: 10px 10px 10px 45px;
   color: #fff;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.search-filter-bar input:focus {
-  outline: none;
-}
+.search-filter-bar input:focus { outline: none; }
 
 .btn-search-action {
-  background: #ccff00;
-  color: #0f0f11;
+  background: #cbd63c; 
+  color: #111113;
   border: none;
-  padding: 0 25px;
-  align-self: stretch; 
-  font-weight: 800;
+  padding: 0 22px;
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
+  font-size: 0.75rem;
   cursor: pointer;
-  transition: background 0.1s ease;
-}
-
-.btn-search-action:hover {
-  background: #ddff33;
+  border-radius: 2px;
 }
 
 .btn-clear-filter {
-  background: #24242b;
-  color: #f4f4f6;
+  background: #24242c;
+  color: #d1d1d6;
   border: none;
   padding: 0 15px;
-  align-self: stretch;
   font-weight: 600;
   cursor: pointer;
 }
 
 .section-title-row {
   margin-bottom: 20px;
-  border-bottom: 2px solid #1a1a1f;
+  border-bottom: 1px solid #1f1f24;
   padding-bottom: 8px;
 }
 
 .section-title-row h2 {
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: #6e6e7e;
 }
 
 /* ==========================================================================
-   4. LISTA DEI CONCERTI (Design Ticket Stub / Biglietto Strappabile)
+   4. IL BIGLIETTO REALE (SOTTILE, DATI ACCURATI)
    ========================================================================== */
 
 .concerts-list {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Ridotto lo spazio tra un concerto e l'altro */
+  gap: 16px; 
 }
 
-.concert-item-card {
-  background: #141418;
-  border: 1px solid #2e2e38;
-  border-radius: 0px; 
-  padding: 0; 
+.real-ticket-card {
   display: flex;
-  align-items: stretch; 
-  transition: border-color 0.2s ease, transform 0.1s ease;
+  background: #17171c;
+  border: 1px solid #24242c;
+  border-radius: 5px;
+  min-height: 125px; 
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.concert-item-card:hover {
-  border-color: #ccff00;
-  transform: translateY(-2px);
+.real-ticket-card:hover {
+  transform: translateY(-1px);
+  border-color: #3e3e4f;
 }
 
-/* Matrice sinistra (Data) con taglio tratteggiato verticale */
-.date-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* --- [A. MARGINE SINISTRO DI MATRICE] --- */
+.tkt-side-matrix {
   background: #1a1a21;
-  padding: 12px 15px; /* Più compatto */
-  min-width: 80px;
-  text-align: center;
-  border-right: 2px dashed #2e2e38; 
-  font-family: monospace;
-}
-
-.date-day { 
-  font-size: 1.6rem; 
-  font-weight: 900; 
-  color: #ffffff; 
-  line-height: 1; 
-}
-.date-month { 
-  font-size: 0.75rem; 
-  color: #ccff00; 
-  font-weight: 700; 
-  margin: 2px 0; 
-  letter-spacing: 1px;
-}
-.date-year { 
-  font-size: 0.7rem; 
-  color: #626272; 
-}
-
-/* Corpo centrale del biglietto (Informazioni) */
-.concert-info-details {
-  flex-grow: 1;
-  padding: 15px 25px; /* Ridotto il padding interno del ticket */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.concert-info-details h3 { 
-  margin: 0 0 4px 0; 
-  font-size: 1.2rem; /* Leggermente più piccolo per salvaguardare spazio */
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  text-transform: uppercase;
-}
-
-.location-text { 
-  margin: 0; 
-  color: #8a8a98; 
-  font-size: 0.8rem; 
-  font-family: monospace;
-}
-.location-text span { 
-  color: #ffffff; 
-  font-weight: bold;
-}
-
-/* Blocco d'azione destro del biglietto (Pulsante Log) */
-.concert-actions-box {
+  width: 26px;
+  min-width: 26px;
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  background: rgba(26, 26, 33, 0.3);
-  border-left: 1px solid #1a1a1f;
+  justify-content: center;
+  border-right: 1px solid #24242c;
 }
 
-.btn-log-action {
-  background: transparent;
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  padding: 8px 18px;
-  border-radius: 0px; 
+.matrix-text {
+  font-family: monospace;
+  font-size: 0.5rem;
+  color: #444454;
+  white-space: nowrap;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  letter-spacing: 1.5px;
+}
+
+/* --- [B. CORPO CENTRALE DEL BIGLIETTO] --- */
+.tkt-main-plate {
+  flex-grow: 1;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Info concerto: Città in Evidenza */
+.tkt-event-info {
+  margin-bottom: 4px;
+}
+
+.tkt-city-name {
+  margin: 0;
+  font-size: 1.35rem; 
   font-weight: 800;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+}
+
+.tkt-venue {
+  margin: 1px 0 0 0;
+  font-size: 0.8rem;
+  color: #8e8e93;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* GRIGLIA DATI ADESSO A 2 COLONNE (Perfetta simmetria) */
+.tkt-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid #24242c;
+  background: #121216;
+  margin: 6px 0;
+}
+
+.grid-box {
+  padding: 5px 12px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #24242c;
+}
+
+.grid-box:last-child {
+  border-right: none;
+}
+
+.box-label {
+  font-family: monospace;
+  font-size: 0.5rem;
+  color: #4e4e5e;
+  margin-bottom: 1px;
+}
+
+.box-value {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #d1d1d6;
+  text-transform: uppercase;
+}
+
+/* Codice a barre orizzontale */
+.tkt-barcode-horiz-wrapper {
+  margin-top: 2px;
+}
+
+.real-css-barcode-h {
+  height: 12px;
+  width: 180px;
+  background: repeating-linear-gradient(
+    90deg,
+    #2c2c35 0px, #2c2c35 2px,
+    transparent 2px, transparent 4px,
+    #2c2c35 4px, #2c2c35 5px,
+    transparent 5px, transparent 7px
+  );
+  background-size: 24px 100%;
+  opacity: 0.5;
+}
+
+/* --- [C. STRISCIA DI STRAPPO (TEAR STRIP)] --- */
+.tkt-tear-strip {
+  width: 14px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #17171c;
+}
+
+.tear-notch.top {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: #111113;
+  border: 1px solid #24242c;
+  border-radius: 50%;
+}
+
+.tear-notch.bottom {
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: #111113;
+  border: 1px solid #24242c;
+  border-radius: 50%;
+}
+
+.tear-line-dashed {
+  height: 100%;
+  border-left: 1px dashed #24242c;
+}
+
+/* --- [D. TALLONCINO DESTRO (STUB) - MASSIMO FOCUS SULL'AZIONE] --- */
+.tkt-right-stub {
+  width: 210px;
+  min-width: 210px;
+  background: #1a1a21;
+  padding: 10px 42px 10px 14px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.stub-meta-top {
+  display: flex;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 0.55rem;
+  color: #4e4e5e;
+  border-bottom: 1px dashed rgba(78, 78, 94, 0.3);
+  padding-bottom: 2px;
+}
+
+.stub-action-center {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0;
+}
+
+/* Bottone Log - Elettro-Wasabi solido */
+.btn-ticket-log {
+  width: 100%;
+  background: #cbd63c; 
+  color: #111113;
+  border: none;
+  padding: 10px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(203, 214, 60, 0.2);
   transition: all 0.15s ease;
 }
 
-.btn-log-action:hover {
-  background: #ffffff;
-  color: #0f0f11;
+.btn-ticket-log:hover {
+  background: #e2ee46;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(203, 214, 60, 0.4);
+}
+
+/* Codice a barre verticale */
+.real-css-barcode-v {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  bottom: 12px;
+  width: 16px;
+  background: repeating-linear-gradient(
+    180deg,
+    #2c2c35 0px, #2c2c35 2px,
+    transparent 2px, transparent 4px,
+    #2c2c35 4px, #2c2c35 5px,
+    transparent 5px, transparent 8px
+  );
+  background-size: 100% 30px;
+  opacity: 0.5;
 }
 
 /* ==========================================================================
-   5. CONTROLLI DI PAGINAZIONE & STATI AUSILIARI
+   5. PAGINAZIONE & AUSILIARI
    ========================================================================== */
 
 .pagination-container {
@@ -311,59 +411,56 @@
   align-items: center;
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 2px solid #1a1a1f;
+  border-top: 1px solid #1f1f24;
 }
 
 .btn-pagination {
-  background: #141418;
-  color: #ffffff;
-  border: 1px solid #2e2e38;
-  padding: 10px 20px;
-  border-radius: 0px;
-  font-weight: 700;
-  text-transform: uppercase;
+  background: #17171c;
+  color: #d1d1d6;
+  border: 1px solid #24242c;
+  padding: 8px 16px;
+  border-radius: 4px;
   font-size: 0.75rem;
-  letter-spacing: 1px;
   font-family: monospace;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-pagination:hover:not(:disabled) {
-  background: transparent;
-  border-color: #ccff00;
-  color: #ccff00;
+  border-color: #cbd63c;
+  color: #cbd63c;
 }
 
 .btn-pagination:disabled {
-  opacity: 0.2;
+  opacity: 0.15;
   cursor: not-allowed;
 }
 
 .current-page-badge {
   font-family: monospace;
-  font-weight: bold;
-  color: #8a8a98;
-  font-size: 0.8rem;
+  color: #4a4a5a;
+  font-size: 0.75rem;
 }
 
-/* Stati di errore, caricamento o liste vuote */
 .loading-state, .error-state, .empty-concerts-box {
   text-align: center;
-  padding: 60px 20px;
-  background: #141418;
-  border: 1px dashed #2e2e38;
-  color: #8a8a98;
+  padding: 40px 20px;
+  background: #17171c;
+  border: 1px dashed #24242c;
+  border-radius: 6px;
+  color: #6e6e7e;
 }
 
 .empty-concerts-box .main-msg { 
-  font-size: 1.2rem; 
-  color: #fff; 
-  font-weight: 800; 
-  text-transform: uppercase; 
+  font-size: 1rem; color: #fff; font-weight: 700; text-transform: uppercase; 
 }
 
-
-
-
-
+.btn-back {
+  margin-top: 15px;
+  background: #24242c;
+  color: #d1d1d6;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
