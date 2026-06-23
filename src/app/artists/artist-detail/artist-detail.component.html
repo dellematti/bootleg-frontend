@@ -108,9 +108,9 @@
                 </div>
                 
                 <div class="stub-action-center">
-                  <button class="btn-ticket-log" (click)="onLogConcert(concert.id)">
-                    LOG / RECENSISCI
-                  </button>
+                  <a class="btn-ticket-log" [routerLink]="['/concert', concert.id]">
+                    DETTAGLIO / RECENSISCI
+                  </a>
                 </div>
 
                 <div class="real-css-barcode-v"></div>

@@ -16,4 +16,14 @@ export class ConcertService {
   getUpcomingConcerts(): Observable<MusicEvent[]> {
     return this.http.get<MusicEvent[]>(this.apiUrl);
   }
+
+  // Recupera i dettagli di un singolo concerto
+  getConcertDetail(concertId: number) {
+    return this.http.get<any>(`http://localhost:8080/api/concerts/${concertId}`);
+  }
+
+  // Recupera la setlist di un concerto
+  getSetlist(concertId: number) {
+    return this.http.get<any>(`http://localhost:8080/api/concerts/${concertId}/setlist`);
+  }
 }

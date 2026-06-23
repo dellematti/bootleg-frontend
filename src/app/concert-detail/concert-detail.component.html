@@ -1,0 +1,99 @@
+<div class="concert-detail-page">
+  <button class="btn-back" (click)="goBack()">← Torna Indietro</button>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <span class="pulse-indicator"></span>
+      <p>Recuperando la scaletta e i dettagli dello show...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error-state">
+      <p>{{ error() }}</p>
+    </div>
+  }
+
+  @if (!isLoading() && concertData(); as data) {
+    <div class="concert-container">
+      
+      <header class="hero">
+        <span class="artist-badge">{{ data.artistName }}</span>
+        <h1>{{ data.name || data.venue }}</h1>
+        <p class="meta">
+            {{ data.date | date:'dd MMM yyyy' | uppercase }} — {{ data.venue }} ({{ data.city }})
+        </p>
+      </header>
+
+      <div class="concert-grid">
+        
+        <section class="setlist-section">
+          <h2>Scaletta dell'Evento</h2>
+          
+          @if (data.sets && data.sets.length > 0) {
+            @for (set of data.sets; track set.name) {
+              <div class="set-block">
+                @if (set.name && set.name !== 'Set') {
+                  <h3 class="set-title">{{ set.name }}</h3>
+                }
+                
+                <ol class="songs-list">
+                  @for (song of set.songs; track song.name) {
+                    <li class="song-item">
+                      <span class="song-name">{{ song.name }}</span>
+                    </li>
+                  }
+                </ol>
+              </div>
+            }
+          } @else {
+            <p class="no-setlist">Nessuna scaletta registrata in archivio per questo show.</p>
+          }
+        </section>
+
+        <aside class="user-log-panel">
+          <div class="log-panel-header">
+            <h3>Il tuo Diario</h3>
+            <span class="log-subtitle">Registra la tua esperienza live</span>
+          </div>
+
+          <div class="log-panel-body">
+            <div class="log-interactive-column">
+              
+              <div class="log-control-box">
+                <label class="control-label">Stato</label>
+                <button class="btn-attended-toggle">
+                  <span>Ho partecipato</span>
+                </button>
+              </div>
+
+              <div class="log-control-box">
+                <label class="control-label">Valutazione</label>
+                <div class="stars-picker-container">
+                  <span class="star-item">★</span>
+                  <span class="star-item">★</span>
+                  <span class="star-item">★</span>
+                  <span class="star-item">★</span>
+                  <span class="star-item">★</span>
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="log-review-area">
+              <label class="control-label">La tua recensione</label>
+              <textarea 
+                placeholder="Scrivi i tuoi pensieri su questo live..." 
+                rows="4">
+              </textarea>
+            </div>
+
+            <div class="log-footer-actions">
+              <button class="btn-save-log">Salva nel diario</button>
+            </div>
+          </div>
+        </aside>
+
+      </div> </div>
+  }
+</div>

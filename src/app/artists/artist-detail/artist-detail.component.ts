@@ -49,6 +49,7 @@ export class ArtistDetailComponent implements OnInit {
 
     this.artistService.getArtistPageData(this.artistId, this.currentPage(), this.cityFilter()).subscribe({
       next: (data) => {
+        data.concerts = this.removeDuplicateConcerts(data.concerts);
         this.artistData.set(data);
         this.isLoading.set(false);
       },
@@ -57,6 +58,18 @@ export class ArtistDetailComponent implements OnInit {
         this.errorMessage.set("Impossibile caricare i dettagli dell'artista.");
         this.isLoading.set(false);
       }
+    });
+  }
+
+  private removeDuplicateConcerts(concerts: any[]): any[] {
+    const seen = new Set();
+    return concerts.filter(concert => {
+      const key = `${concert.name}|${concert.date}|${concert.venue}`;
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
     });
   }
 

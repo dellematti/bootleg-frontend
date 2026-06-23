@@ -1,0 +1,354 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #121214;
+  color: #e1e1e6;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.concert-detail-page {
+  max-width: 1100px; /* Aumentato da 800px a 1100px per gestire il layout a due colonne */
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* --- BOTTONE TORNA INDIETRO --- */
+.btn-back {
+  background: transparent;
+  border: 1px solid #323238;
+  color: #a8a8b3;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 30px;
+}
+
+.btn-back:hover {
+  background-color: #202024;
+  color: #ffffff;
+  border-color: #a8a8b3;
+}
+
+/* --- SCHEDA HERO DEL CONCERTO --- */
+.hero {
+  background: linear-gradient(135deg, #202024 0%, #1c1c1f 100%);
+  border: 1px solid #29292e;
+  padding: 40px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.artist-badge {
+  display: inline-block;
+  background-color: #04d361;
+  color: #09090a;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero .meta {
+  color: #a8a8b3;
+  font-size: 1rem;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* --- CONTENITORE GRID (DUE COLONNE) --- */
+.concert-grid {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start; /* Evita che la sidebar si allunghi artificialmente quanto la scaletta */
+}
+
+/* --- COLONNA SINISTRA: SEZIONE SCALETTA --- */
+.setlist-section {
+  flex: 1; /* Prende tutto lo spazio rimanente sulla sinistra (circa il 65-70%) */
+  background-color: #1c1c1f;
+  border: 1px solid #29292e;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.setlist-section h2 {
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #323238;
+  padding-bottom: 10px;
+}
+
+.set-block {
+  margin-bottom: 35px;
+}
+
+.set-title {
+  font-size: 1.2rem;
+  color: #4ea8de;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* --- LISTA CANZONI --- */
+.songs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: song-counter;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #202024;
+  transition: background-color 0.15s ease;
+}
+
+.song-item:last-child {
+  border-bottom: none;
+}
+
+.song-item:hover {
+  background-color: #29292e;
+  border-radius: 6px;
+}
+
+.song-item::before {
+  counter-increment: song-counter;
+  content: counter(song-counter, decimal-leading-zero);
+  color: #61616c;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-right: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.song-name {
+  font-size: 1.1rem;
+  color: #e1e1e6;
+  font-weight: 500;
+}
+
+/* --- COLONNA DESTRA: 🎬 PANNELLO DI LOG SIDEBAR (LETTERBOXD STYLE) --- */
+.user-log-panel {
+  width: 340px; /* Larghezza fissa e compatta per la colonna destra */
+  flex-shrink: 0; /* Impedisce il ridimensionamento */
+  background-color: #1c1c1f;
+  border: 1px solid #29292e;
+  padding: 24px; /* Ridotto leggermente per adattarsi alla sidebar */
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.log-panel-header {
+  border-bottom: 1px solid #323238;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.log-panel-header h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.log-subtitle {
+  font-size: 0.8rem;
+  color: #7c7c8a;
+}
+
+/* Riorganizzato in colonna verticale per la dimensione della sidebar */
+.log-interactive-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.log-control-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #7c7c8a;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Bottone "Ho Partecipato" esteso a tutta la larghezza per impatto estetico */
+.btn-attended-toggle {
+  background: #202024;
+  color: #e1e1e6;
+  border: 1px solid #323238;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.btn-attended-toggle:hover {
+  background: #29292e;
+  border-color: #04d361;
+  color: #04d361;
+}
+
+.eye-icon {
+  font-size: 0.95rem;
+}
+
+/* Selettore Stelline */
+.stars-picker-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2px;
+}
+
+.star-item {
+  font-size: 1.8rem;
+  color: #29292e;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.1s ease;
+  padding-right: 6px;
+  line-height: 1;
+}
+
+.star-item:hover {
+  color: #ffb800;
+  transform: scale(1.15);
+}
+
+/* Area di testo per i commenti */
+.log-review-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.log-review-area textarea {
+  background: #121214;
+  border: 1px solid #29292e;
+  color: #ffffff;
+  padding: 12px;
+  font-size: 0.9rem;
+  resize: vertical;
+  line-height: 1.4;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.log-review-area textarea:focus {
+  outline: none;
+  border-color: #7c7c8a;
+  background: #161619;
+}
+
+/* Pulsante di conferma */
+.log-footer-actions {
+  display: flex;
+}
+
+.btn-save-log {
+  background: #04d361;
+  color: #09090a;
+  border: none;
+  padding: 12px 14px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: 100%; /* Bottone largo quanto la sidebar per bilanciare la struttura */
+}
+
+.btn-save-log:hover {
+  background-color: #02b250;
+}
+
+.btn-save-log:active {
+  transform: scale(0.98);
+}
+
+/* --- STATI AUSILIARI --- */
+.loading-state, .error-state, .no-setlist {
+  text-align: center;
+  padding: 60px 20px;
+  color: #a8a8b3;
+  font-size: 1.1rem;
+}
+
+.error-state {
+  color: #f75a68;
+  background-color: rgba(247, 90, 104, 0.1);
+  border: 1px solid rgba(247, 90, 104, 0.2);
+  border-radius: 8px;
+}
+
+.pulse-indicator {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 20px auto;
+  background-color: #04d361;
+  border-radius: 50%;
+  animation: pulse 1.2s infinite ease-in-out;
+  opacity: 0.6;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 0.4; }
+  100% { transform: scale(0.6); opacity: 0.8; }
+}
+
+/* --- RESPONSIVENESS (MOBILE FRIENDLY) --- */
+@media (max-width: 850px) {
+  .concert-grid {
+    flex-direction: column; /* Su schermi piccoli le colonne tornano a impilarsi */
+  }
+  
+  .user-log-panel {
+    width: 100%; /* La sidebar prende tutta la larghezza su mobile */
+    box-sizing: border-box;
+    order: -1; /* Sposta il pannello log SOPRA la scaletta quando si va su mobile */
+  }
+}
