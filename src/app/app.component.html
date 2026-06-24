@@ -25,10 +25,16 @@
 
           <!-- UTENTE LOGGATO -->
           <div *ngIf="auth.loggedIn; else loggedOut" class="user-profile-zone">
+  
             <span class="user-greeting">
-              Ciao, <strong>{{ auth.user?.username }}</strong>
+              Ciao, 
+              <strong routerLink="/my-account" class="username-link">
+                {{ auth.user?.username }}
+              </strong>
             </span>
+            
             <button (click)="logout()" class="btn-logout">Logout</button>
+
           </div>
 
           <!-- UTENTE NON LOGGATO -->

@@ -352,3 +352,17 @@
     order: -1; /* Sposta il pannello log SOPRA la scaletta quando si va su mobile */
   }
 }
+
+
+/* Stato attivo quando l'utente ha partecipato al concerto */
+.btn-attended-toggle.active {
+  background-color: rgba(4, 211, 97, 0.1); /* Sfondo con opacità del tuo verde */
+  border-color: #04d361; /* Bordo verde neon */
+  color: #04d361; /* Testo verde neon */
+  box-shadow: 0 0 12px rgba(4, 211, 97, 0.2);
+}
+
+.btn-attended-toggle.active:hover {
+  background-color: rgba(4, 211, 97, 0.15);
+  transform: translateY(-1px);
+}

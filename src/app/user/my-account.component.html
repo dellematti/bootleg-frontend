@@ -1,0 +1,80 @@
+<div class="account-page-container">
+  
+  <header class="profile-header">
+    <div class="profile-avatar">
+      <span>👤</span>
+    </div>
+    <div class="profile-info">
+      <h1>Il tuo Diario Live</h1>
+      <p class="profile-stats">
+        Hai collezionato <strong>{{ totalConcerts() }}</strong> {{ totalConcerts() === 1 ? 'concerto' : 'concerti' }}
+      </p>
+    </div>
+  </header>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <span class="pulse-indicator"></span>
+      <p>Caricando i tuoi ricordi musicali...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error-state">
+      <p>{{ error() }}</p>
+    </div>
+  }
+
+  @if (!isLoading() && !error()) {
+    
+    @if (attendedConcerts().length > 0) {
+      <div class="diary-grid">
+        @for (log of attendedConcerts(); track log.id) {
+          <div class="diary-card">
+            
+            <div class="card-image-box" [routerLink]="['/concert', log.concertId]">
+              <img [src]="log.imageUrl || 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=600'" [alt]="log.artistName">
+              <div class="card-overlay">
+                <span>Vedi Scaletta →</span>
+              </div>
+            </div>
+
+            <div class="card-content">
+              <div class="card-meta-row">
+                <span class="concert-date">{{ log.concertDate | date:'dd MMM yyyy' | uppercase }}</span>
+                <span class="artist-badge-mini">LIVE</span>
+              </div>
+              
+              <h3 [routerLink]="['/concert', log.concertId]">{{ log.artistName || 'Artista Sconosciuto' }}</h3>
+              
+              <p class="concert-venue">{{ log.venue }} — {{ log.city }}</p>
+
+              @if (log.rating || log.review) {
+                <div class="user-feedback-section">
+                  @if (log.rating) {
+                    <div class="stars-display">{{ getStars(log.rating) }}</div>
+                  }
+                  @if (log.review) {
+                    <p class="review-preview">“{{ log.review }}”</p>
+                  }
+                </div>
+              } @else {
+                <div class="attended-only-badge">✓ Segnato come visto</div>
+              }
+            </div>
+
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="empty-diary-state">
+        <p class="empty-icon">🎫</p>
+        <h2>Il tuo diario è ancora vuoto!</h2>
+        <p>Non hai ancora registrato nessun concerto. Cerca i tuoi artisti preferiti e segna i live a cui hai partecipato.</p>
+        <button class="btn-explore" routerLink="/search">Esplora Concerti</button>
+      </div>
+    }
+
+  }
+
+</div>

@@ -229,3 +229,31 @@
     gap: 16px;
   }
 }
+
+
+.username-link {
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.username-link:hover {
+  color: #04d361; /* Diventa verde neon al passaggio del mouse */
+}
+
+
+
+.user-profile-zone .user-greeting .username-link {
+  color: #cbd63c; /* Parte già colorato di giallo wasabi per far capire che è un link */
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(203, 214, 60, 0.3); /* Sottile linea tratteggiata stile data-sheet */
+  transition: all 0.2s ease;
+}
+
+/* Effetto quando passi il mouse sopra */
+.user-profile-zone .user-greeting .username-link:hover {
+  color: #e2ee46; /* Si illumina di un giallo più acceso */
+  border-bottom-color: #e2ee46; /* La linea diventa solida e luminosa */
+  opacity: 0.9;
+}

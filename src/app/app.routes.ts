@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
 import { authGuard } from './guards/auth.guard';
 import { ArtistDetailComponent } from './artists/artist-detail/artist-detail.component';
 import { ConcertDetailComponent } from './concert-detail/concert-detail.component';
+import { MyAccountComponent } from './user/my-account.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },            // TODO : da rimuovere (prova)
@@ -30,6 +31,8 @@ export const routes: Routes = [
   { path: 'albums', component: AlbumsComponent, canActivate: [authGuard]  },
   { path: 'albums/:id', component: AlbumDetailComponent, canActivate: [authGuard] },
  
+  { path: 'my-account', component: MyAccountComponent },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   

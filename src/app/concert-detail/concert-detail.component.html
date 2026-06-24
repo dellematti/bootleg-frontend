@@ -62,8 +62,11 @@
               
               <div class="log-control-box">
                 <label class="control-label">Stato</label>
-                <button class="btn-attended-toggle">
-                  <span>Ho partecipato</span>
+                <button 
+                  class="btn-attended-toggle" 
+                  [class.active]="isAttended()" 
+                  (click)="toggleAttendance()">
+                  <span>{{ isAttended() ? 'Partecipato' : 'Ho partecipato' }}</span>
                 </button>
               </div>
 

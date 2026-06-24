@@ -1,0 +1,240 @@
+.account-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #f3f4f6;
+}
+
+/* Header Profilo */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #1e1e24;
+  padding: 30px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  border: 1px solid #2e2e38;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: #2e2e38;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  border: 2px solid #04d361; /* Il tuo verde iconico */
+}
+
+.profile-info h1 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.profile-stats {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 1.1rem;
+}
+
+.profile-stats strong {
+  color: #04d361;
+  font-size: 1.3rem;
+}
+
+/* Griglia Diario */
+.diary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.diary-card {
+  background: #1e1e24;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #2e2e38;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.diary-card:hover {
+  transform: translateY(-4px);
+  border-color: #04d361;
+}
+
+/* Box Immagine con Overlay */
+.card-image-box {
+  position: relative;
+  height: 160px;
+  cursor: pointer;
+}
+
+.card-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #04d361;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card-image-box:hover .card-overlay {
+  opacity: 1;
+}
+
+/* Contenuti della Card */
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.concert-date {
+  font-size: 0.8rem;
+  color: #04d361;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.card-content h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.card-content h3:hover {
+  color: #04d361;
+}
+
+.concert-venue {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin: 0 0 16px 0;
+}
+
+/* Feedback Utente (Stelle e recensioni) */
+.user-feedback-section {
+  background: #141419;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: auto;
+  border-left: 3px solid #04d361;
+}
+
+.stars-display {
+  color: #fbbf24;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+.review-preview {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #d1d5db;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.attended-only-badge {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  background: #2e2e38;
+  padding: 6px 12px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-top: auto;
+}
+
+/* Stati di Errore / Vuoti */
+.loading-state, .error-state, .empty-diary-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #1e1e24;
+  border-radius: 16px;
+  border: 1px solid #2e2e38;
+}
+
+.pulse-indicator {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #04d361;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+  margin-bottom: 16px;
+}
+
+.empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+}
+
+.empty-diary-state h2 {
+  margin: 0 0 12px 0;
+}
+
+.empty-diary-state p {
+  color: #9ca3af;
+  max-width: 500px;
+  margin: 0 auto 24px auto;
+}
+
+.btn-explore {
+  background: #04d361;
+  color: #141419;
+  border: none;
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-explore:hover {
+  background: #03b652;
+  transform: translateY(-2px);
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+
+.card-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.artist-badge-mini {
+  font-size: 0.7rem;
+  background: rgba(203, 214, 60, 0.15); /* Sfondo giallo wasabi trasparente */
+  color: #cbd63c; /* Testo giallo wasabi */
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
