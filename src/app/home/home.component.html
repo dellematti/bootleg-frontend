@@ -8,16 +8,18 @@
   <!-- INTESTAZIONE CENTRATA & HERO -->
   <header class="main-hero">
     <h1 class="brand-title">Bootleg<span class="dot">.</span></h1>
-    <p class="brand-subtitle">Traccia i tuoi live. Salva i prossimi tour. Condividi i ricordi dal pit.</p>
+    <p class="brand-subtitle">Traccia i tuoi live. Salva i prossimi tour. Condividi i ricordi dal&nbsp;pit.</p>
     
     <!-- BARRA DI RICERCA REALE E FUNZIONANTE -->
     <div class="search-wrapper" #searchWrapper>
       <div class="search-input-field">
+        <!-- Icona di ricerca 
         <span class="search-icon">🔍</span>
+        -->
         <input 
           #searchBox
           type="text" 
-          placeholder="Cerca un artista (es. Coldplay, Green Day...)"
+          placeholder="Cerca un artista per aggiungere il concerto"
           (input)="search($event)"
           (focus)="onInputFocus($event)"
         />
@@ -53,16 +55,16 @@
     </div>
   </header>
 
-  <section class="recent-section" aria-labelledby="recent-concerts-title">
-    <div class="section-title-bar">
-      <div class="section-heading-copy">
-        <p class="section-kicker">Il tuo diario</p>
-        <h2 id="recent-concerts-title">Ultimi concerti</h2>
-      </div>
-      @if (isAuthenticated() && recentConcerts().length > 0) {
+  <section class="recent-section" aria-label="Il tuo diario concerti">
+    @if (isAuthenticated() && recentConcerts().length > 0) {
+      <div class="section-title-bar">
+        <div class="section-heading-copy">
+          <p class="section-kicker">Il tuo diario</p>
+          <h2 id="recent-concerts-title">Ultimi concerti</h2>
+        </div>
         <a class="section-action" routerLink="/my-account">Vedi tutto <span aria-hidden="true">→</span></a>
-      }
-    </div>
+      </div>
+    }
 
     @if (isRecentConcertsLoading()) {
       <p class="section-state" role="status">Caricamento dei tuoi concerti...</p>
@@ -87,16 +89,16 @@
         }
       </div>
     } @else {
+      <p class="section-kicker recent-empty-kicker">Il tuo diario</p>
       <div class="recent-empty-state">
         <span class="empty-state-mark" aria-hidden="true">✳</span>
         <div>
-          <h3>Il prossimo ricordo inizia dal vivo.</h3>
-          <p>Aggiungi i concerti che hai visto per ritrovare qui i tuoi ultimi cinque.</p>
+          <p>Aggiungi i tuoi concerti per ritrovarli qui</p>
         </div>
         @if (isAuthenticated()) {
           <a class="empty-state-action" routerLink="/artists">Trova un artista <span aria-hidden="true">→</span></a>
         } @else {
-          <a class="empty-state-action" routerLink="/login">Accedi al tuo diario <span aria-hidden="true">→</span></a>
+          <a class="empty-state-action" routerLink="/register">Accedi al tuo diario <span aria-hidden="true">→</span></a>
         }
       </div>
     }

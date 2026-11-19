@@ -29,11 +29,11 @@
     
     @if (attendedConcerts().length > 0) {
       <div class="diary-grid">
-        @for (log of attendedConcerts(); track log.id) {
+        @for (log of attendedConcerts(); track log.id; let first = $first) {
           <div class="diary-card">
             
             <div class="card-image-box" [routerLink]="['/concert', log.concertId]">
-              <img [src]="log.imageUrl || 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=600'" [alt]="log.artistName">
+              <img [src]="log.imageUrl" [alt]="log.artistName" [loading]="first ? 'eager' : 'lazy'" decoding="async">
               <div class="card-overlay">
                 <span>Vedi Scaletta →</span>
               </div>

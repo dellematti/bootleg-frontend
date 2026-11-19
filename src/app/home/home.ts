@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, PLATFORM_ID, signal, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, signal, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Subject, Observable, of } from 'rxjs';
 // 1. 👈 IMPORTA shareReplay DA 'rxjs/operators'
@@ -12,6 +12,7 @@ import { Artist } from '../models/artist';
 import { UserConcertLog } from '../models/user-concert-log';
 import { AuthService } from '../services/auth.service';
 import { UserConcertService } from '../services/user-concert.service';
+import { ImageUrlService } from '../services/image-url.service';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
     private artistService: ArtistService,
     private authService: AuthService,
     private userConcertService: UserConcertService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private imageUrlService: ImageUrlService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -65,11 +66,8 @@ export class HomeComponent implements OnInit {
       // 2. 👈 IL FIX REALE: Mantiene in memoria l'ultimo valore emesso (la lista di artisti)
       shareReplay(1) 
     );
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadConcerts();
-      this.loadRecentConcerts();
-    }
+    this.loadConcerts();
+    this.loadRecentConcerts();
   }
 
   search(event: Event): void {
@@ -93,7 +91,7 @@ export class HomeComponent implements OnInit {
       next: (data) => {
         this.concerts.set(data.map((concert) => ({
           ...concert,
-          imageUrl: this.getImageUrl(concert.imageUrl, 900)
+          imageUrl: this.imageUrlService.getOptimizedUrl(concert.imageUrl, 900, this.fallbackConcertImage)
         })));
         this.isConcertsLoading.set(false);
       },
@@ -102,30 +100,6 @@ export class HomeComponent implements OnInit {
         this.isConcertsLoading.set(false);
       }
     });
-  }
-
-  getImageUrl(source: string | null | undefined, width: number): string {
-    const imageUrl = source || this.fallbackConcertImage;
-
-    try {
-      const url = new URL(imageUrl);
-      if (url.hostname === 'images.unsplash.com') {
-        url.searchParams.set('auto', 'format');
-        url.searchParams.set('fit', 'crop');
-        url.searchParams.set('q', '85');
-        url.searchParams.set('w', String(width));
-      } else if (url.hostname.endsWith('ticketm.net')) {
-        url.pathname = url.pathname.replace(
-          /_EVENT_DETAIL_PAGE_16_9(?=\.[^.]+$)/,
-          '_RETINA_PORTRAIT_16_9'
-        );
-      } else if (url.hostname === 'cdn-images.dzcdn.net') {
-        url.pathname = url.pathname.replace('/250x250-', '/1000x1000-');
-      }
-      return url.toString();
-    } catch {
-      return imageUrl;
-    }
   }
 
   private loadRecentConcerts(): void {
@@ -151,7 +125,7 @@ export class HomeComponent implements OnInit {
               .slice(0, 5)
               .map((log) => ({
                 ...log,
-                imageUrl: this.getImageUrl(log.imageUrl, 1000)
+                imageUrl: this.imageUrlService.getOptimizedUrl(log.imageUrl, 1000, this.fallbackConcertImage)
               }));
             this.recentConcerts.set(latestLogs);
             this.isRecentConcertsLoading.set(false);

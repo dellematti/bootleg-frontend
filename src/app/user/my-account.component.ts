@@ -2,6 +2,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserConcertService } from '../services/user-concert.service'; // Adegua il percorso se necessario
+import { ImageUrlService } from '../services/image-url.service';
+import { UserConcertLog } from '../models/user-concert-log';
 
 @Component({
   selector: 'app-my-account',
@@ -12,14 +14,19 @@ import { UserConcertService } from '../services/user-concert.service'; // Adegua
 })
 export class MyAccountComponent implements OnInit {
   
-  attendedConcerts = signal<any[]>([]);
+  attendedConcerts = signal<UserConcertLog[]>([]);
   isLoading = signal<boolean>(true);
   error = signal<string | null>(null);
 
   // Calcoli statistici rapidi tramite Signal
   totalConcerts = signal<number>(0);
 
-  constructor(private userConcertService: UserConcertService) {}
+  readonly fallbackConcertImage = 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=600';
+
+  constructor(
+    private userConcertService: UserConcertService,
+    private imageUrlService: ImageUrlService
+  ) {}
 
   ngOnInit(): void {
     this.loadUserDashboard();
@@ -32,7 +39,12 @@ export class MyAccountComponent implements OnInit {
     this.userConcertService.getMyLogs().subscribe({
       next: (logs) => {
         // Ordiniamo i concerti dal più recente al più vecchio in base alla data del live
-        const sortedLogs = logs.sort((a, b) => new Date(b.concertDate).getTime() - new Date(a.concertDate).getTime());
+        const sortedLogs = [...logs]
+          .sort((a, b) => new Date(b.concertDate).getTime() - new Date(a.concertDate).getTime())
+          .map((log) => ({
+            ...log,
+            imageUrl: this.imageUrlService.getOptimizedUrl(log.imageUrl, 1000, this.fallbackConcertImage)
+          }));
         
         this.attendedConcerts.set(sortedLogs);
         this.totalConcerts.set(sortedLogs.length);
