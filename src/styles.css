@@ -2,8 +2,44 @@
 html, body, app-root {
   margin: 0 !important;
   padding: 0 !important;
-  background-color: #1a1e24 !important; /* Il nuovo grigio di base, meno cupo */
+  background-color: #f1f4ee !important;
   width: 100%;
   min-height: 100vh;
   box-sizing: border-box;
+}
+
+html[data-theme='dark'],
+html[data-theme='dark'] body,
+app-root[data-theme='dark'] {
+  background-color: #151a17 !important;
+}
+
+app-root[data-theme='dark'] .bootleg-container {
+  --page: #151a17;
+  --surface: #1d2721;
+  --surface-raised: #26332a;
+  --line: #39483d;
+  --text: #edf1e9;
+  --muted: #a6b1a6;
+  --accent: #e08b72;
+  --warm: #e3aa68;
+}
+
+app-root[data-theme='dark'] .bootleg-container {
+  color: #edf1e9;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(227, 239, 223, 0.025) 31px 32px),
+    linear-gradient(145deg, #1d2721 0%, #151a17 58%, #26332a 100%);
+}
+
+app-root[data-theme='dark'] .search-input-field,
+app-root[data-theme='dark'] .search-results-overlay,
+app-root[data-theme='dark'] .artists-horizontal-carousel,
+app-root[data-theme='dark'] .artist-avatar-box,
+app-root[data-theme='dark'] .section-state,
+app-root[data-theme='dark'] .recent-empty-state,
+app-root[data-theme='dark'] .poster-location-tag,
+app-root[data-theme='dark'] .poster-link,
+app-root[data-theme='dark'] .loading-shimmer {
+  background-color: #1d2721;
 }

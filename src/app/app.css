@@ -1,20 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 
 :host {
+  --app-page: #f1f4ee;
+  --app-surface: #fafbf8;
+  --app-surface-raised: #e7ede5;
+  --app-line: #d7dfd5;
+  --app-text: #202820;
+  --app-muted: #68756a;
+  --app-accent: #c45843;
+  --app-accent-strong: #a84031;
+  --app-secondary: #527558;
+  --app-warm: #d18b45;
+  --app-error: #a84031;
+  --app-grid: rgba(53, 78, 55, 0.025);
+  --app-button-text: #ffffff;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #111113; /* Forza lo sfondo corretto sull'intera app */
+  background-color: var(--app-page);
+}
+
+:host([data-theme='dark']) {
+  --app-page: #151a17;
+  --app-surface: #1d2721;
+  --app-surface-raised: #26332a;
+  --app-line: #39483d;
+  --app-text: #edf1e9;
+  --app-muted: #a6b1a6;
+  --app-accent: #e08b72;
+  --app-accent-strong: #f0a18a;
+  --app-secondary: #abc28f;
+  --app-warm: #e3aa68;
+  --app-error: #ff9a83;
+  --app-grid: rgba(227, 239, 223, 0.025);
+  --app-button-text: #191e19;
 }
 
 /* --- NAVBAR EDITORIALE / INDUSTRIAL --- */
 .navbar {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: rgba(17, 17, 19, 0.85); /* Sfondo onyx coerente */
-  backdrop-filter: blur(12px);
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--app-surface);
+  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid #1f1f24; /* Linea scura e millimetrica */
+  border-bottom: 1px solid var(--app-line);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -28,7 +57,7 @@
 
 .nav-container,
 .footer-container {
-  max-width: 1000px; /* Allineato perfettamente alla larghezza del contenuto dei biglietti */
+  max-width: 1160px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
@@ -39,6 +68,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 /* --- BRAND LOGO (Stile Sistema/Matrice) --- */
@@ -53,19 +88,20 @@
   width: 20px;
   height: 20px;
   display: block;
-  filter: brightness(0) invert(1); /* Se è un'icona scura, la rende bianca pulita */
+  filter: none;
 }
 
 .logo-text {
   font-size: 1.15rem;
   font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.5px;
+  color: var(--app-text);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0;
   text-transform: uppercase; /* Logo in caps per un look più bold */
 }
 
 .logo-text .logo-accent {
-  color: #cbd63c; /* Il nostro giallo wasabi iconico */
+  color: var(--app-accent);
 }
 
 /* --- AREA UTENTE & BOTTONI GEOMETRICI --- */
@@ -77,22 +113,21 @@
 
 .user-greeting {
   font-size: 0.8rem;
-  color: #6e6e7e;
-  font-family: monospace;
+  color: var(--app-muted);
 }
 
 .user-greeting strong {
-  color: #ffffff;
+  color: var(--app-text);
   font-weight: 700;
 }
 
 /* Bottone Login: Diventa un blocchetto tecnico compatto */
 .btn-login {
-  background: #cbd63c;
-  color: #111113;
+  background: var(--app-accent);
+  color: var(--app-button-text);
   text-decoration: none;
   padding: 8px 16px;
-  border-radius: 4px; /* Angoli netti coerenti con i biglietti */
+  border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -101,18 +136,19 @@
 }
 
 .btn-login:hover {
-  background: #e2ee46;
+  background: var(--app-accent-strong);
   transform: translateY(-1px);
 }
 
 /* Bottone Logout: Sottile e minimale */
 .btn-logout {
   background: transparent;
-  border: 1px solid #24242c;
-  color: #8e8e93;
+  border: 1px solid var(--app-line);
+  color: var(--app-text);
+  background: var(--app-surface);
   padding: 7px 14px;
   border-radius: 4px;
-  font-family: monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   cursor: pointer;
@@ -121,20 +157,45 @@
 }
 
 .btn-logout:hover {
-  border-color: #ef4444;
-  color: #ffffff;
-  background: rgba(239, 68, 68, 0.05);
+  border-color: var(--app-accent);
+  color: var(--app-accent-strong);
+  background: var(--app-surface-raised);
 }
 
 .nav-shimmer {
-  font-family: monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
-  color: #4a4a5a;
+  color: var(--app-muted);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid var(--app-line);
+  border-radius: 4px;
+  background: var(--app-surface);
+  color: var(--app-text);
+  font: 600 0.8rem 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--app-accent);
+  color: var(--app-accent-strong);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--app-accent);
+  outline-offset: 3px;
 }
 
 /* --- CONTENITORE CONTENUTI (Corregge il colore dello sfondo dell'app) --- */
 .page-content {
-  background-color: #111113; /* Uniformato allo sfondo scuro del dettaglio artista */
+  background-color: var(--app-page);
   width: 100%;
   flex: 1 0 auto; 
 }
@@ -143,9 +204,9 @@
 /* 📄 FOOTER IN STILE "DATA SHEET"                            */
 /* ========================================================= */
 .app-footer {
-  font-family: 'Inter', sans-serif;
-  background-color: #17171c; /* Stesso colore dei blocchi interni del biglietto */
-  border-top: 1px solid #1f1f24; 
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--app-surface-raised);
+  border-top: 1px solid var(--app-line);
   padding: 24px 0;
   width: 100%;
   flex-shrink: 0;
@@ -167,21 +228,21 @@
 }
 
 .footer-copyright {
-  font-family: monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #8e8e93;
+  color: var(--app-text);
   margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .footer-tagline {
-  font-family: monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.65rem;
-  color: #4a4a5a;
+  color: var(--app-muted);
   margin: 0;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 /* Menu link interni del footer */
@@ -194,18 +255,17 @@
 }
 
 .footer-navigation a {
-  font-family: monospace;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #6e6e7e;
+  color: var(--app-text);
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   transition: color 0.15s ease;
 }
 
-/* I link si accendono del giallo wasabi */
 .footer-navigation a:hover {
-  color: #cbd63c;
+  color: var(--app-accent);
 }
 
 /* Responsive per schermi piccoli */
@@ -238,22 +298,22 @@
 }
 
 .username-link:hover {
-  color: #04d361; /* Diventa verde neon al passaggio del mouse */
+  color: var(--app-accent-strong);
 }
 
 
 
 .user-profile-zone .user-greeting .username-link {
-  color: #cbd63c; /* Parte già colorato di giallo wasabi per far capire che è un link */
+  color: var(--app-accent-strong);
   cursor: pointer;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(203, 214, 60, 0.3); /* Sottile linea tratteggiata stile data-sheet */
+  border-bottom: 1px dashed rgba(196, 88, 67, 0.35);
   transition: all 0.2s ease;
 }
 
 /* Effetto quando passi il mouse sopra */
 .user-profile-zone .user-greeting .username-link:hover {
-  color: #e2ee46; /* Si illumina di un giallo più acceso */
-  border-bottom-color: #e2ee46; /* La linea diventa solida e luminosa */
+  color: #a84031;
+  border-bottom-color: var(--app-accent-strong);
   opacity: 0.9;
 }

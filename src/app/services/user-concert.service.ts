@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserConcertLog } from '../models/user-concert-log';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class UserConcertService {
   constructor(private http: HttpClient) {}
 
   // VERIFICA QUESTO NOME: deve essere identico
-  getMyLogs(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl, this.httpOptions);
+  getMyLogs(): Observable<UserConcertLog[]> {
+    return this.http.get<UserConcertLog[]>(this.apiUrl, this.httpOptions);
   }
 
   saveLog(request: { concertId: number; attended?: boolean; rating?: number | null; review?: string | null }): Observable<any> {

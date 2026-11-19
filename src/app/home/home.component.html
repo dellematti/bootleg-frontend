@@ -53,7 +53,56 @@
     </div>
   </header>
 
-  <!-- SEZIONE 2: TOUR REALI (Ripristinati dal tuo Service) -->
+  <section class="recent-section" aria-labelledby="recent-concerts-title">
+    <div class="section-title-bar">
+      <div class="section-heading-copy">
+        <p class="section-kicker">Il tuo diario</p>
+        <h2 id="recent-concerts-title">Ultimi concerti</h2>
+      </div>
+      @if (isAuthenticated() && recentConcerts().length > 0) {
+        <a class="section-action" routerLink="/my-account">Vedi tutto <span aria-hidden="true">→</span></a>
+      }
+    </div>
+
+    @if (isRecentConcertsLoading()) {
+      <p class="section-state" role="status">Caricamento dei tuoi concerti...</p>
+    } @else if (recentConcertsError()) {
+      <p class="section-state section-state-error" role="alert">Non è stato possibile caricare il tuo diario. Riprova più tardi.</p>
+    } @else if (isAuthenticated() && recentConcerts().length > 0) {
+      <div class="recent-concert-grid">
+        @for (log of recentConcerts(); track log.concertId; let first = $first) {
+          <a class="recent-concert-card" [routerLink]="['/concert', log.concertId]" [attr.aria-label]="'Apri il concerto di ' + log.artistName">
+            <div class="recent-poster">
+              <img [src]="log.imageUrl" [alt]="log.artistName || 'Concerto dal vivo'" [loading]="first ? 'eager' : 'lazy'" decoding="async">
+              @if (log.rating) {
+                <span class="recent-rating" [attr.aria-label]="'Valutazione ' + log.rating + ' su 5'">{{ log.rating }} <span aria-hidden="true">★</span></span>
+              }
+            </div>
+            <div class="recent-card-info">
+              <time class="recent-date" [attr.datetime]="log.concertDate">{{ log.concertDate | date:'dd MMM yyyy' }}</time>
+              <h3>{{ log.artistName || 'Artista sconosciuto' }}</h3>
+              <p>{{ log.venue }}<span aria-hidden="true"> · </span>{{ log.city }}</p>
+            </div>
+          </a>
+        }
+      </div>
+    } @else {
+      <div class="recent-empty-state">
+        <span class="empty-state-mark" aria-hidden="true">✳</span>
+        <div>
+          <h3>Il prossimo ricordo inizia dal vivo.</h3>
+          <p>Aggiungi i concerti che hai visto per ritrovare qui i tuoi ultimi cinque.</p>
+        </div>
+        @if (isAuthenticated()) {
+          <a class="empty-state-action" routerLink="/artists">Trova un artista <span aria-hidden="true">→</span></a>
+        } @else {
+          <a class="empty-state-action" routerLink="/login">Accedi al tuo diario <span aria-hidden="true">→</span></a>
+        }
+      </div>
+    }
+  </section>
+
+  <!-- SEZIONE TOUR REALI -->
   <main class="showcase-section">
     <div class="section-title-bar">
       <div class="indicator-group">
@@ -74,7 +123,7 @@
         @for (concert of concerts(); track concert.id) {
           <article class="compact-poster-card">
             <div class="poster-image-box">
-              <img [src]="concert.imageUrl" [alt]="concert.name">
+              <img [src]="concert.imageUrl" [alt]="concert.name" loading="lazy" decoding="async">
               <span class="poster-location-tag">{{ concert.city }}</span>
             </div>
             <div class="poster-details">

@@ -54,12 +54,13 @@
         <aside class="user-log-panel">
           <div class="log-panel-header">
             <h3>Il tuo Diario</h3>
-            <span class="log-subtitle">Registra la tua esperienza live</span>
+            <span class="log-subtitle">Esprimi il tuo giudizio</span>
           </div>
 
           <div class="log-panel-body">
             <div class="log-interactive-column">
               
+              <!-- Stato -->
               <div class="log-control-box">
                 <label class="control-label">Stato</label>
                 <button 
@@ -70,30 +71,57 @@
                 </button>
               </div>
 
+              <!-- Valutazione Istantanea -->
               <div class="log-control-box">
                 <label class="control-label">Valutazione</label>
                 <div class="stars-picker-container">
-                  <span class="star-item">★</span>
-                  <span class="star-item">★</span>
-                  <span class="star-item">★</span>
-                  <span class="star-item">★</span>
-                  <span class="star-item">★</span>
+                  @for (star of [1, 2, 3, 4, 5]; track star) {
+                    <span 
+                      class="star-item" 
+                      [class.filled]="currentRating() !== null && star <= currentRating()!"
+                      (click)="setRating(star)">
+                      ★
+                    </span>
+                  }
                 </div>
               </div>
               
             </div>
 
+            <!-- Sezione Recensione Dinamica (Scrittura vs Lettura) -->
             <div class="log-review-area">
               <label class="control-label">La tua recensione</label>
-              <textarea 
-                placeholder="Scrivi i tuoi pensieri su questo live..." 
-                rows="4">
-              </textarea>
+              
+              @if (isEditingReview()) {
+                <!-- STATO DI SCRITTURA -->
+                <textarea 
+                  #reviewInput
+                  [value]="currentReview()"
+                  (input)="onReviewTyping(reviewInput.value)"
+                  placeholder="Racconta la tua esperienza sotto il palco..." 
+                  rows="4">
+                </textarea>
+
+                <div class="log-footer-actions">
+                  <button 
+                    class="btn-save-log" 
+                    [disabled]="reviewInput.value.trim() === ''"
+                    (click)="publishReview()">
+                    Pubblica recensione
+                  </button>
+                </div>
+              } @else {
+                <!-- STATO DI LETTURA (RECENSIONE PUBBLICATA) -->
+                <div class="published-review-box">
+                  <p class="review-text">{{ currentReview() }}</p>
+                  <button class="btn-edit-review" (click)="enableReviewEdit()">
+                    ✏️ Modifica recensione
+                  </button>
+                </div>
+              }
+
             </div>
 
-            <div class="log-footer-actions">
-              <button class="btn-save-log">Salva nel diario</button>
-            </div>
           </div>
         </aside>
 
